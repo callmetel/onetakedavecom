@@ -2,6 +2,8 @@ import Links from "../components/Links";
 import Video from "../components/Video";
 import Title from "../components/Title";
 import Quote from "../components/Quote";
+import Discover from "../components/Discover";
+import DiscoverButton from "../components/DiscoverButton";
 import Link from "next/link";
 
 const What = () => {
@@ -25,6 +27,8 @@ const What = () => {
 			<Link href="/where">
 				<h2>Where &rarr;</h2>
 			</Link>
+			<Discover state={JourneyProps.state} />
+			<DiscoverButton state={JourneyProps.state} />
 		</div>
 	);
 };

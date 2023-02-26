@@ -2,6 +2,8 @@ import Links from "../components/Links";
 import Video from "../components/Video";
 import Title from "../components/Title";
 import Quote from "../components/Quote";
+import Discover from "../components/Discover";
+import DiscoverButton from "../components/DiscoverButton";
 import Link from "next/link";
 
 const Why = () => {
@@ -30,6 +32,8 @@ const Why = () => {
 			<Link href="/how">
 				<h2>How &rarr;</h2>
 			</Link>
+			<Discover state={JourneyProps.state} />
+			<DiscoverButton state={JourneyProps.state} />
 		</div>
 	);
 };
