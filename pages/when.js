@@ -1,4 +1,5 @@
 import Links from "../components/Links";
+import Link from "next/link";
 
 const When = () => {
 	return (
