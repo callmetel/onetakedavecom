@@ -1,4 +1,5 @@
 import Links from "../components/Links";
+import Video from "../components/Video";
 import Quote from "../components/Quote";
 import Link from "next/link";
 
@@ -23,6 +24,7 @@ const When = () => {
 	return (
 		<div className="page">
 			<h1>When</h1>
+			<Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
 			<Quote {...JourneyProps.quote} />
 			<Link href="/why">
 				<h2>Why &rarr;</h2>

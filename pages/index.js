@@ -1,4 +1,5 @@
 import Links from "../components/Links";
+import Video from "../components/Video";
 import Quote from "../components/Quote";
 import Link from "next/link";
 
@@ -11,7 +12,7 @@ export default function Home() {
 		next: "who",
 		loopvid: process.env.loopVideoURL + 0 + ".mp4",
 		loopstill: process.env.loopStillURL + 0 + ".jpg",
-		scenevid: process.env.sceneVideoURL + 0 + ".mp4",
+		scenevid: process.env.loopVideoURL + 0 + ".mp4",
 		scenestill: process.env.sceneStillURL + 0 + ".jpg",
 	};
 
@@ -19,6 +20,7 @@ export default function Home() {
 		<div className="page">
 			<main className="main">
 				<h1>Start</h1>
+        <Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
         <Quote {...JourneyProps.quote} />
 				<Link href="/who">
 					<h2>Who &rarr;</h2>
