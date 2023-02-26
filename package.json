@@ -14,5 +14,8 @@
   },
   "license": "MIT",
   "keywords": [],
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.58.3"
+  }
 }
