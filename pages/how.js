@@ -1,5 +1,6 @@
 import Links from "../components/Links";
 import Video from "../components/Video";
+import Title from "../components/Title";
 import Quote from "../components/Quote";
 import Link from "next/link";
 
@@ -18,7 +19,7 @@ const How = () => {
 
 	return (
 		<div className="page">
-			<h1>How</h1>
+			<Title title={JourneyProps.title}/>
 			<Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
 			<Quote {...JourneyProps.quote} />
 			<Link href="/">

@@ -7,11 +7,8 @@ export default function Home() {
   const JourneyProps = {
 		index: 0,
 		state: "start",
-		title: "",
 		quote: ["ONE WAY", "OR ANOTHER", "WORD TO MOTHA", "WE GON' GET IT"],
 		next: "who",
-		loopvid: process.env.loopVideoURL + 0 + ".mp4",
-		loopstill: process.env.loopStillURL + 0 + ".jpg",
 		scenevid: process.env.loopVideoURL + 0 + ".mp4",
 		scenestill: process.env.sceneStillURL + 0 + ".jpg",
 	};
