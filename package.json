@@ -10,7 +10,8 @@
     "framer-motion": "6.3.11",
     "next": "latest",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "video-react": "^0.16.0"
   },
   "license": "MIT",
   "keywords": [],

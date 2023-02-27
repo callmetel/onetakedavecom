@@ -29,7 +29,7 @@ const Where = () => {
 			<Title title={JourneyProps.title}/>
 			<Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
 			<Quote {...JourneyProps.quote} />
-			<Link href="/when">
+			<Link href="/when" className="changePage">
 				<h2>When &rarr;</h2>
 			</Link>
 			<Discover state={JourneyProps.state} />

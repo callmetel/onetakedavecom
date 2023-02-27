@@ -22,7 +22,7 @@ const Who = () => {
             <Title title={JourneyProps.title}/>
             <Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
             <Quote {...JourneyProps.quote} />
-			<Link href="/what">
+			<Link href="/what" className="changePage">
 				<h2>What &rarr;</h2>
 			</Link>
             <Discover state={JourneyProps.state} />

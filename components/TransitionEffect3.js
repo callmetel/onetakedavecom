@@ -60,6 +60,9 @@ const TransitionEffect3 = ({ children }) => {
           initial="in"
           animate={["center", "scaleUp"]}
           exit={["scaleDown", "out"]}
+          onAnimationComplete={definition => {
+    console.log('Completed animating', definition)
+  }}
         >
           {children}
         </motion.div>

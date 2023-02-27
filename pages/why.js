@@ -29,7 +29,7 @@ const Why = () => {
 			<Title title={JourneyProps.title}/>
 			<Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
 			<Quote {...JourneyProps.quote} />
-			<Link href="/how">
+			<Link href="/how" className="changePage">
 				<h2>How &rarr;</h2>
 			</Link>
 			<Discover state={JourneyProps.state} />

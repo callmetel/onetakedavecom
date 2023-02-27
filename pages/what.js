@@ -24,7 +24,7 @@ const What = () => {
 			<Title title={JourneyProps.title}/>
 			<Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
 			<Quote {...JourneyProps.quote} />
-			<Link href="/where">
+			<Link href="/where" className="changePage">
 				<h2>Where &rarr;</h2>
 			</Link>
 			<Discover state={JourneyProps.state} />

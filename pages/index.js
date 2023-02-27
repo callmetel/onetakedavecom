@@ -16,10 +16,9 @@ export default function Home() {
 	return (
 		<div className="page">
 			<main className="main">
-				<h1>Start</h1>
         <Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
         <Quote {...JourneyProps.quote} />
-				<Link href="/who">
+				<Link href="/who" className="changePage">
 					<h2>Who &rarr;</h2>
 				</Link>
 			</main>

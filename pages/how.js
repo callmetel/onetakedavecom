@@ -24,7 +24,7 @@ const How = () => {
 			<Title title={JourneyProps.title}/>
 			<Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
 			<Quote {...JourneyProps.quote} />
-			<Link href="/">
+			<Link href="/" className="changePage">
 				<h2>Restart &rarr;</h2>
 			</Link>
 			<Discover state={JourneyProps.state} />

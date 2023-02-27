@@ -1,4 +1,8 @@
+const path = require('path');
 module.exports = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
   env: {
 		assetURL: "https://dg09qo2eiz3mc.cloudfront.net",
 		loopStillURL: "https://dg09qo2eiz3mc.cloudfront.net/still/loop/",
