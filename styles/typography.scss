@@ -1,3 +1,35 @@
+@font-face {
+    font-family: "Gotham";
+    src: url("#{$path-font}/hinted-GothamLight.woff2") format("woff2"),
+    url("#{$path-font}/hinted-GothamLight.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Gotham";
+    src: url("#{$path-font}/hinted-GothamMedium.woff2") format("woff2"),
+    url("#{$path-font}/hinted-GothamMedium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Gotham";
+    src: url("#{$path-font}/hinted-GothamBold.woff2") format("woff2"),
+    url("#{$path-font}/hinted-GothamBold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Gotham";
+    src: url("#{$path-font}/hinted-GothamBlack.woff2") format("woff2"),
+    url("#{$path-font}/hinted-GothamBlack.woff") format("woff");
+    font-weight: bolder;
+    font-style: normal;
+}
+
 .title a {
     color: #0070f3;
     text-decoration: none;

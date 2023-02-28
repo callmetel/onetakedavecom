@@ -5,11 +5,13 @@
     width: 100%;
     text-align: center;
     @include flex-center;
+    font-size: 4em;
 
     .title-block {
         background: $red;
         color: $white;
         padding: .2em;
         text-transform: uppercase;
+        font-size: inherit;
     }
 }

@@ -20,15 +20,23 @@ const What = () => {
 	};
 
 	return (
-		<div className="page">
-			<Title title={JourneyProps.title}/>
-			<Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
-			<Quote {...JourneyProps.quote} />
-			<Link href="/where" className="changePage">
-				<h2>Where &rarr;</h2>
-			</Link>
-			<Discover state={JourneyProps.state} />
-			<DiscoverButton state={JourneyProps.state} />
+		<div className="page story-mode">
+			<main className="main">
+				<Title title={JourneyProps.title} />
+				<Video
+					link={JourneyProps.scenevid}
+					still={JourneyProps.scenestill}
+					state={JourneyProps.state}
+				/>
+				<div className="content">
+					<Quote {...JourneyProps.quote} />
+					<Link href="/where" className="changePage">
+						<h2>Where &rarr;</h2>
+					</Link>
+					<DiscoverButton state={JourneyProps.state} />
+				</div>
+				<Discover state={JourneyProps.state} />
+			</main>
 		</div>
 	);
 };

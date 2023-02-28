@@ -1,3 +1,5 @@
 a.changePage {
-    z-index: 10;
+    z-index: 30;
+    @include absolute(bottom 0 right -30px);
+
 }

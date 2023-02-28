@@ -2,43 +2,28 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useRouter } from "next/router";
 
 const variants = {
-	in: {
-		scale: 0.8,
-		y: 100,
-		x: "100%",
+	fadeIn: {
+		y: 0,
+		opacity: 0,
 		transition: {
-			duration: 0.4,
+			duration: 1,
+			ease: "easeInOut",
 		},
 	},
-	center: {
-		x: 0,
-		scale: 0.8,
-		transformOrigin: "top",
-		transition: {
-			duration: 0.4,
-		},
-	},
-	scaleUp: {
-		scale: 1,
+	inactive: {
+		opacity: 1,
 		y: 0,
 		transition: {
-			duration: 0.4,
-			delay: 0.5,
+			duration: 1,
+			ease: "easeInOut",
 		},
 	},
-	scaleDown: {
-		scale: 0.8,
-		y: 100,
-		transition: {
-			duration: 0.4,
-		},
-	},
-	out: {
+	fadeOut: {
 		opacity: 0,
-		x: "-100%",
+		y: 0,
 		transition: {
-			duration: 0.4,
-			delay: 0.5,
+			duration: 1,
+			ease: "easeInOut",
 		},
 	},
 };
@@ -53,18 +38,28 @@ const SceneTransition = ({ children }) => {
 
 	return (
 		<div className="scene-transition">
-			<AnimatePresence initial={false} exitBeforeEnter>
+			<AnimatePresence initial={false}>
 				<motion.div
 					key={asPath}
-					variants={!shouldReduceMotion ? variants : null}
-					initial="in"
-					animate={["center", "scaleUp"]}
-					exit={["scaleDown", "out"]}
+					variants={variants}
+					initial="fadeIn"
+					animate={["inactive"]}
+					exit={["fadeOut"]}
+					onAnimationStart={(definition) => {
+						console.log("Started animating", definition);
+						if (definition === "fadeOut") {
+							document.querySelector(".page").classList.add("story-mode");
+						}
+					}}
 					onAnimationComplete={(definition) => {
 						console.log("Completed animating", definition);
 
-						if(definition === "scaleUp") {
-							document.getElementById("SceneVideo").play();
+						if (definition === "inactive") {
+							// document.getElementById("SceneVideo").play();
+							console.log(document.getElementById("SceneVideo"));
+							document.getElementById("SceneVideo").addEventListener('canplay', (event) => { 
+								console.log("can play");
+							});
 						}
 					}}>
 					{children}

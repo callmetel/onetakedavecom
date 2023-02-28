@@ -5,6 +5,7 @@ import Quote from "../components/Quote";
 import Discover from "../components/Discover";
 import DiscoverButton from "../components/DiscoverButton";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const When = () => {
 	const JourneyProps = {
@@ -24,16 +25,33 @@ const When = () => {
 		scenestill: process.env.sceneStillURL + 4 + ".jpg",
 	};
 
+	const router = useRouter();
+
 	return (
-		<div className="page">
-			<Title title={JourneyProps.title}/>
-			<Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
-			<Quote {...JourneyProps.quote} />
-			<Link href="/why" className="changePage">
-				<h2>Why &rarr;</h2>
-			</Link>
-			<Discover state={JourneyProps.state} />
-			<DiscoverButton state={JourneyProps.state} />
+		<div className="page story-mode">
+			<main className="main">
+				<Title title={JourneyProps.title} />
+				<Video
+					link={JourneyProps.scenevid}
+					still={JourneyProps.scenestill}
+					state={JourneyProps.state}
+				/>
+				<div className="content">
+					<Quote {...JourneyProps.quote} />
+					<button className="changePage" onClick={(e)=>{
+						console.log(e);
+						setTimeout(function(){
+							router.push("/why");
+						},1500);
+						
+					}}>
+						<h2>Why &rarr;</h2>
+					</button>
+					<DiscoverButton state={JourneyProps.state} />
+				</div>
+
+				<Discover state={JourneyProps.state} />
+			</main>
 		</div>
 	);
 };

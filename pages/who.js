@@ -7,7 +7,7 @@ import DiscoverButton from "../components/DiscoverButton";
 import Link from "next/link";
 
 const Who = () => {
-    const JourneyProps = {
+	const JourneyProps = {
 		index: 1,
 		state: "who",
 		title: "Who is OneTakeDave?",
@@ -18,15 +18,24 @@ const Who = () => {
 	};
 
 	return (
-		<div className="page">
-            <Title title={JourneyProps.title}/>
-            <Video link={JourneyProps.scenevid} still={JourneyProps.scenestill} state={JourneyProps.state} />
-            <Quote {...JourneyProps.quote} />
-			<Link href="/what" className="changePage">
-				<h2>What &rarr;</h2>
-			</Link>
-            <Discover state={JourneyProps.state} />
-            <DiscoverButton state={JourneyProps.state} />
+		<div className="page story-mode">
+			<main className="main">
+				<Title title={JourneyProps.title} />
+				<Video
+					link={JourneyProps.scenevid}
+					still={JourneyProps.scenestill}
+					state={JourneyProps.state}
+				/>
+				<div className="content">
+					<Quote {...JourneyProps.quote} />
+					<Link href="/what" className="changePage">
+						<h2>What &rarr;</h2>
+					</Link>
+					<DiscoverButton state={JourneyProps.state} />
+				</div>
+
+				<Discover state={JourneyProps.state} />
+			</main>
 		</div>
 	);
 };

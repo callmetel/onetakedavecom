@@ -7,4 +7,62 @@
     flex-direction: column;
     position: relative;
     @include flex-center;
+
+    &:before {
+        content: "";
+        @include size(15%, 100%);
+        @include fixed(top 0 left 0);
+        z-index: 20;
+        background: $white;
+        transition: width .35s $trans-cubic;
+    }
+
+    &:after {
+        content: "";
+        @include size(15%, 100%);
+        @include fixed(top 0 right 0);
+        z-index: 20;
+        background: $white;
+        transition: width .35s $trans-cubic;
+    }
+
+    main {
+        &:before {
+            content: "";
+            @include size(100%, 20%);
+            @include fixed(top 0 left 0);
+            z-index: 20;
+            background: $white;
+            transition: height .35s $trans-cubic;
+        }
+
+        &:after {
+            content: "";
+            @include size(100%, 20%);
+            @include fixed(bottom 0 left 0);
+            z-index: 20;
+            background: $white;
+            transition: height .35s $trans-cubic;
+        }
+
+        .content {
+            @include size(70vw, 60vh);
+            @include pos-center;
+            position: absolute;
+            z-index: 20;
+        }
+    }
+
+    &.story-mode {
+
+        &:before,
+        &:after {
+            width: 0;
+        }
+
+        main:before,
+        main:after {
+            height: 0;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { useState, useRef } from "react";
 
 const Video = (props) => {
@@ -6,9 +6,13 @@ const Video = (props) => {
     const VideoRef = useRef(null);
     const showContent = () => {
 		console.log("show content");
+        document.querySelector(".page").classList.remove("story-mode");
 	};
+    const myStyle = {
+         backgroundImage: `url('${props.still}')`,
+    }
 	return (
-		<motion.div className="video-scene">
+		<div className="video-scene" style={myStyle}>
 			<video
                 ref={VideoRef}
 				data-video={props.state}
@@ -19,9 +23,10 @@ const Video = (props) => {
 				placeholder={props.still}
 				playsInline
 				onEnded={showContent}
+                autoPlay={props.state === "start" ? true:true}
                 loop={props.state === "start" ? true:false}
 			/>
-		</motion.div>
+		</div>
 	);
 };
 export default Video;
