@@ -4,7 +4,7 @@ import Title from "../components/Title";
 import Quote from "../components/Quote";
 import Discover from "../components/Discover";
 import DiscoverButton from "../components/DiscoverButton";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Who = () => {
 	const JourneyProps = {
@@ -17,8 +17,9 @@ const Who = () => {
 		scenestill: process.env.sceneStillURL + 1 + ".jpg",
 	};
 
+	const router = useRouter();
 	return (
-		<div className="page story-mode">
+		<div className="page">
 			<main className="main">
 				<Title title={JourneyProps.title} />
 				<Video
@@ -28,9 +29,15 @@ const Who = () => {
 				/>
 				<div className="content">
 					<Quote {...JourneyProps.quote} />
-					<Link href="/what" className="changePage">
+					<button
+						className="changePage"
+						onClick={() => {
+							const quoteBlock = document.querySelectorAll(".quote-block");
+							quoteBlock.forEach((block) => block.classList.add("reveal-hiding"));
+							setTimeout(function(){router.push("/what")}, 600);
+						}}>
 						<h2>What &rarr;</h2>
-					</Link>
+					</button>
 					<DiscoverButton state={JourneyProps.state} />
 				</div>
 

@@ -1,20 +1,25 @@
 // import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+// import { useState, useRef } from "react";
 
 const Video = (props) => {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const VideoRef = useRef(null);
-    const showContent = () => {
+	const showContent = () => {
 		console.log("show content");
-        document.querySelector(".page").classList.remove("story-mode");
+        // if(props.state === "start") {
+        //     document.getElementById("SceneVideo").setAttribute("loop",true);
+        //     document.getElementById("SceneVideo").play();
+        // }
+		document.querySelector(".page").classList.remove("story-mode");
+		document.querySelectorAll(".quote-block").forEach((block) => {
+			block.classList.remove("hidden","reveal-hide");
+			block.classList.add("reveal");
+		});
 	};
-    const myStyle = {
-         backgroundImage: `url('${props.still}')`,
-    }
+	const myStyle = {
+		backgroundImage: `url('${props.still}')`,
+	};
 	return (
 		<div className="video-scene" style={myStyle}>
 			<video
-                ref={VideoRef}
 				data-video={props.state}
 				id="SceneVideo"
 				src={props.link}
@@ -23,8 +28,9 @@ const Video = (props) => {
 				placeholder={props.still}
 				playsInline
 				onEnded={showContent}
-                autoPlay={props.state === "start" ? true:true}
-                loop={props.state === "start" ? true:false}
+				autoPlay={props.state === "start" ? true : true}
+                loop={props.state === "start" ? true : false}
+                muted={true}
 			/>
 		</div>
 	);

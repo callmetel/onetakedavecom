@@ -47,19 +47,19 @@ const SceneTransition = ({ children }) => {
 					exit={["fadeOut"]}
 					onAnimationStart={(definition) => {
 						console.log("Started animating", definition);
-						if (definition === "fadeOut") {
-							document.querySelector(".page").classList.add("story-mode");
+						if (definition === "inactive") {
+						document.querySelectorAll(".page").forEach((page) => page.classList.add("story-mode"));
 						}
 					}}
 					onAnimationComplete={(definition) => {
 						console.log("Completed animating", definition);
+						if (definition === "fadeOut") {
+							// document.querySelectorAll(".page").forEach((page) => page.classList.add("story-mode"));
+						}
 
 						if (definition === "inactive") {
-							// document.getElementById("SceneVideo").play();
-							console.log(document.getElementById("SceneVideo"));
-							document.getElementById("SceneVideo").addEventListener('canplay', (event) => { 
-								console.log("can play");
-							});
+							console.log("inactive");
+							// document.querySelector(".page").classList.add("story-mode");
 						}
 					}}>
 					{children}

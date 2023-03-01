@@ -4,7 +4,6 @@ import Title from "../components/Title";
 import Quote from "../components/Quote";
 import Discover from "../components/Discover";
 import DiscoverButton from "../components/DiscoverButton";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 const When = () => {
@@ -26,9 +25,8 @@ const When = () => {
 	};
 
 	const router = useRouter();
-
 	return (
-		<div className="page story-mode">
+		<div className="page">
 			<main className="main">
 				<Title title={JourneyProps.title} />
 				<Video
@@ -38,13 +36,13 @@ const When = () => {
 				/>
 				<div className="content">
 					<Quote {...JourneyProps.quote} />
-					<button className="changePage" onClick={(e)=>{
-						console.log(e);
-						setTimeout(function(){
-							router.push("/why");
-						},1500);
-						
-					}}>
+					<button
+						className="changePage"
+						onClick={() => {
+							const quoteBlock = document.querySelectorAll(".quote-block");
+							quoteBlock.forEach((block) => block.classList.add("reveal-hiding"));
+							setTimeout(function(){router.push("/why")}, 600);
+						}}>
 						<h2>Why &rarr;</h2>
 					</button>
 					<DiscoverButton state={JourneyProps.state} />

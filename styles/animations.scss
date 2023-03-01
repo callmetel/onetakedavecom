@@ -1,0 +1,61 @@
+// Revealer
+.block-revealer {
+    transform: translateX(-100%);
+    transition: transform 250ms ease-out;
+}
+
+.block-text.hide-text>.block-revealer__content {
+    transition-delay: 0s;
+}
+
+.block-revealer__content {
+    opacity: 0;
+    transition-delay: .5s;
+}
+
+.block-text.hide-text>.block-revealer__element {
+    transition: opacity 150ms 500ms ease-out, transform 170ms 500ms ease-in-out;
+}
+
+.block-revealer__element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 150ms ease-out, transform 170ms 500ms ease-in-out;
+    transform: scaleX(1);
+}
+
+.reveal {
+    transform: translateX(0);
+    opacity: 1;
+
+    >.block-revealer__content {
+        opacity: 1 !important;
+    }
+
+    >.block-revealer__element {
+        transform: scaleX(0) !important;
+        opacity: 1 !important;
+        transform-origin: 100% 50% 0px;
+        background-color: rgb(255, 255, 255);
+    }
+}
+
+.reveal-hiding {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 500ms .4s ease-in-out, opacity .5s 1s !important;
+
+    >.block-revealer__element {
+        transform: scaleX(1) !important;
+    }
+}
+
+.reveal-hide {
+    transition: opacity 170ms 400ms ease-out, transform 500ms ease-in-out !important;
+}

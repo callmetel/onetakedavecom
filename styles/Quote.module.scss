@@ -15,5 +15,33 @@
         padding: .2em .4em;
         font-size: 3em;
         margin: 0 0 .2em;
+
+        // @for $i from 4 through 1 {
+        //     &:nth-child(#{$i}) {
+        //         transition-delay: 150ms * $i;
+        //     }
+        // }
+
+        // &.reveal {
+        @for $i from 1 through 4 {
+            &:nth-child(#{$i}) {
+                transition-delay: 150ms * $i;
+            }
+        }
+
+        // }
+
+        &.reveal-hiding {
+            @for $i from 1 through 4 {
+                &:nth-child(#{$i}) {
+                    transition-delay: calc(150ms * 4) / $i !important;
+                }
+            }
+        }
+
+        &.hidden {
+            visibility: hidden !important;
+            z-index: -9999 !important;
+        }
     }
 }

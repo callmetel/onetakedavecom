@@ -1,7 +1,7 @@
 import Links from "../components/Links";
 import Video from "../components/Video";
 import Quote from "../components/Quote";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Home() {
 	const JourneyProps = {
@@ -13,8 +13,9 @@ export default function Home() {
 		scenestill: process.env.loopStillURL + 6 + ".jpg",
 	};
 
+	const router = useRouter();
 	return (
-		<div className="page story-mode">
+		<div className="page">
 			<main className="main">
 				<Video
 					link={JourneyProps.scenevid}
@@ -23,9 +24,15 @@ export default function Home() {
 				/>
 				<div className="content">
 					<Quote {...JourneyProps.quote} />
-					<Link href="/who" className="changePage">
+					<button
+						className="changePage"
+						onClick={() => {
+              const quoteBlock = document.querySelectorAll(".quote-block");
+							quoteBlock.forEach((block) => block.classList.add("reveal-hiding"));
+							setTimeout(function () {router.push("/who")}, 600);
+						}}>
 						<h2>Who &rarr;</h2>
-					</Link>
+					</button>
 				</div>
 			</main>
 		</div>
