@@ -1,9 +1,11 @@
 import Links from "../components/Links";
 import Video from "../components/Video";
-import Quote from "../components/Quote";
-import { useRouter } from "next/router";
+import { Quote, QuoteAlt } from "../components/Quote";
+import { Button, DiscoverButton } from "../components/Buttons";
+import { useRef } from "react";
 
 export default function Home() {
+	const ref = useRef();
 	const JourneyProps = {
 		index: 0,
 		state: "start",
@@ -13,7 +15,6 @@ export default function Home() {
 		scenestill: process.env.loopStillURL + 6 + ".jpg",
 	};
 
-	const router = useRouter();
 	return (
 		<div className="page">
 			<main className="main">
@@ -23,16 +24,8 @@ export default function Home() {
 					state={JourneyProps.state}
 				/>
 				<div className="content">
-					<Quote {...JourneyProps.quote} />
-					<button
-						className="changePage"
-						onClick={() => {
-              const quoteBlock = document.querySelectorAll(".quote-block");
-							quoteBlock.forEach((block) => block.classList.add("reveal-hiding"));
-							setTimeout(function () {router.push("/who")}, 600);
-						}}>
-						<h2>Who &rarr;</h2>
-					</button>
+					<QuoteAlt {...JourneyProps.quote} />
+					<Button name="Start" link="/who" onClick={() => ref.current.log()} />
 				</div>
 			</main>
 		</div>

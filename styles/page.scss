@@ -21,7 +21,7 @@
         content: "";
         @include size(15%, 100%);
         @include fixed(top 0 right 0);
-        z-index: 20;
+        z-index: 10;
         background: $white;
         transition: width .35s $trans-cubic;
     }
@@ -40,7 +40,7 @@
             content: "";
             @include size(100%, 20%);
             @include fixed(bottom 0 left 0);
-            z-index: 20;
+            z-index: 10;
             background: $white;
             transition: height .35s $trans-cubic;
         }

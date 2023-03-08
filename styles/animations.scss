@@ -1,3 +1,107 @@
+@keyframes wipe {
+    0% {
+        color: rgba($white, 0);
+        box-shadow: inset 0 0 0 0 $white;
+        // background: $white;
+    }
+
+    100% {
+        color: $white;
+        box-shadow: inset 700px 0 0 0 $red;
+        // background: $red;
+    }
+}
+
+@keyframes lightwipe {
+    0% {
+        color: rgba($black, 0);
+        box-shadow: inset 0 0 0 0 $white;
+        // background: $white;
+    }
+
+    100% {
+        color: $black;
+        box-shadow: inset 700px 0 0 0 $white;
+        // background: $red;
+    }
+}
+
+@keyframes hint {
+    0% {
+        color: $white;
+        box-shadow: inset 0 0 0 0 $black;
+    }
+
+    45% {
+        color: $white;
+        box-shadow: inset 0 0 0 0 $black;
+    }
+
+    50% {
+        box-shadow: inset 250px 0 0 0 $white;
+        color: $black;
+    }
+
+    55% {
+        box-shadow: inset 250px 0 0 0 $white;
+        color: $black;
+    }
+
+    95% {
+        box-shadow: inset 250px 0 0 0 $white;
+        color: $black;
+    }
+
+    100% {
+        color: $white;
+        box-shadow: inset 0 0 0 0 $black;
+    }
+}
+
+@keyframes blackwipe {
+    0% {
+        width: 0;
+    }
+
+    40% {
+        width: 0;
+    }
+
+    50% {
+        width: 100%;
+    }
+
+    90% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes redwipe {
+    0% {
+        width: 0;
+    }
+
+    40% {
+        width: 0;
+    }
+
+    50% {
+        width: 100%;
+    }
+
+    90% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
 // Revealer
 .block-revealer {
     transform: translateX(-100%);
@@ -42,7 +146,15 @@
         transform: scaleX(0) !important;
         opacity: 1 !important;
         transform-origin: 100% 50% 0px;
-        background-color: rgb(255, 255, 255);
+        background-color: $white;
+
+    }
+
+    &.alt {
+        >.block-revealer__element {
+            background-color: $red;
+
+        }
     }
 }
 

@@ -2,7 +2,7 @@
     @include fixed(top 0 left 0);
     @include size(100vw, 100vh);
     @include flex-center;
-    background-size: contain;
+    background-size: auto;
     background-position: center;
     background-repeat: no-repeat;
     z-index: 0;

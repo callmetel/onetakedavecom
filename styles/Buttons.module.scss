@@ -1,0 +1,99 @@
+button {
+    padding: 1em 1.25em;
+    font: $font-weight-bold 1.2em/1 $gotham;
+    letter-spacing: .1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    background-color: $black;
+    border: 0;
+    color: $white;
+    box-shadow: inset 0 0 0 0 $black;
+    appearance: none;
+
+    .text {
+        position: relative;
+        z-index: 10;
+    }
+
+    .block {
+        @include size(0%, 100%);
+        @include absolute(top 0 left 0);
+        background: $red;
+        display: block;
+        transition: width .25s $trans-cubic;
+    }
+
+    &:hover {
+        .block {
+            transition: width .25s $trans-cubic;
+            width: 100%;
+        }
+    }
+
+    &.changePage {
+        z-index: 30;
+        opacity: 1;
+        transform: translateX(0);
+        transition: all .75s .75s $trans-cubic;
+        @include absolute(bottom -5% right -10%);
+    }
+
+    &.discoverBtn {
+        @include absolute(top -5% right -5%);
+        background: $red;
+        opacity: 1;
+        transform: translateX(0);
+        transition: all .75s .5s $trans-cubic;
+
+        .block {
+            background: $black;
+        }
+    }
+
+    &.redwipe {
+        .block {
+            @include size(100%);
+            background: $red;
+
+            &:after {
+                position: absolute;
+                z-index: 5;
+                content: "";
+                transition: all 0.25s;
+                background: $black;
+                left: 0;
+                top: 0;
+                height: 100%;
+                animation: 4000ms redwipe infinite ease-in-out 2s;
+                -webkit-animation-play-state: running;
+                animation-play-state: running;
+            }
+        }
+    }
+
+    &.no-delay {
+        transition-delay: none !important;
+    }
+
+    &.hide {
+        opacity: 0;
+        transform: translateX(-10%);
+    }
+}
+
+.story-mode {
+    button {
+        &.changePage {
+            opacity: 0;
+            transform: translateX(-10%);
+            transition: all .25s $trans-cubic;
+        }
+
+        &.discoverBtn {
+            opacity: 0;
+            transform: translateX(-10%);
+            transition: all .25s $trans-cubic;
+        }
+    }
+}

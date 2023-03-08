@@ -1,24 +1,38 @@
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 // import { useState, useRef } from "react";
 
 const Video = (props) => {
-	const showContent = () => {
-		console.log("show content");
-        // if(props.state === "start") {
-        //     document.getElementById("SceneVideo").setAttribute("loop",true);
-        //     document.getElementById("SceneVideo").play();
-        // }
-		document.querySelector(".page").classList.remove("story-mode");
+	if (typeof window != "undefined") {
+		const vid = document.getElementById("SceneVideo");
+		vid.addEventListener("play", function () {
+			console.log("playing");
+			if (props.state === "start") {
+				revealQuote();
+			}
+		});
+	}
+	const revealQuote = () => {
 		document.querySelectorAll(".quote-block").forEach((block) => {
-			block.classList.remove("hidden","reveal-hide");
+			block.classList.remove("hidden", "reveal-hide");
 			block.classList.add("reveal");
 		});
 	};
+
+	const showContent = () => {
+		console.log("show content");
+		document.querySelector(".page").classList.remove("story-mode");
+		document.querySelector(".video-scene").style.backgroundImage=`url('${props.endStill}')`;
+		revealQuote();
+	};
+
 	const myStyle = {
 		backgroundImage: `url('${props.still}')`,
 	};
+
 	return (
-		<div className="video-scene" style={myStyle}>
+		<motion.div className="video-scene" style={myStyle} initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+            transition={{ ease: "easeInOut", duration: .5 }}>
 			<video
 				data-video={props.state}
 				id="SceneVideo"
@@ -29,10 +43,10 @@ const Video = (props) => {
 				playsInline
 				onEnded={showContent}
 				autoPlay={props.state === "start" ? true : true}
-                loop={props.state === "start" ? true : false}
-                muted={true}
+				loop={props.state === "start" ? true : false}
+				muted={true}
 			/>
-		</div>
+		</motion.div>
 	);
 };
 export default Video;

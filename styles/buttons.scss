@@ -1,8 +1,0 @@
-.changePage {
-    z-index: 30;
-    @include absolute(bottom 0 right -30px);
-    appearance: none;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-}

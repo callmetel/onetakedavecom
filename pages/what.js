@@ -3,10 +3,11 @@ import Video from "../components/Video";
 import Title from "../components/Title";
 import Quote from "../components/Quote";
 import Discover from "../components/Discover";
-import DiscoverButton from "../components/DiscoverButton";
-import { useRouter } from "next/router";
+import { Button, DiscoverButton } from "../components/Buttons";
+import { useRef } from "react";
 
 const What = () => {
+	const ref = useRef();
 	const JourneyProps = {
 		index: 2,
 		state: "what",
@@ -17,9 +18,9 @@ const What = () => {
 		loopstill: process.env.loopStillURL + 2 + ".jpg",
 		scenevid: process.env.sceneVideoURL + 2 + ".mp4",
 		scenestill: process.env.sceneStillURL + 2 + ".jpg",
+		endstill: process.env.sceneStillURL + 3 + ".jpg",
 	};
 
-	const router = useRouter();
 	return (
 		<div className="page">
 			<main className="main">
@@ -27,19 +28,12 @@ const What = () => {
 				<Video
 					link={JourneyProps.scenevid}
 					still={JourneyProps.scenestill}
+					endStill={JourneyProps.endstill}
 					state={JourneyProps.state}
 				/>
 				<div className="content">
 					<Quote {...JourneyProps.quote} />
-					<button
-						className="changePage"
-						onClick={() => {
-							const quoteBlock = document.querySelectorAll(".quote-block");
-							quoteBlock.forEach((block) => block.classList.add("reveal-hiding"));
-							setTimeout(function(){router.push("/where")}, 600);
-						}}>
-						<h2>Where &rarr;</h2>
-					</button>
+					<Button name="Where" link="/where" onClick={() => ref.current.log()} />
 					<DiscoverButton state={JourneyProps.state} />
 				</div>
 				<Discover state={JourneyProps.state} />
