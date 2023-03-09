@@ -169,5 +169,17 @@
 }
 
 .reveal-hide {
-    transition: opacity 170ms 400ms ease-out, transform 500ms ease-in-out !important;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 170ms .65s ease-out, transform 500ms .5s ease-in-out !important;
+
+    >.block-revealer__content {
+        opacity: 0 !important;
+    }
+
+    >.block-revealer__element {
+        transform: scaleX(0) !important;
+        opacity: 1 !important;
+        transition: opacity .1s ease, transform .25s .1s $trans-cubic;
+    }
 }

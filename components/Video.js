@@ -9,8 +9,16 @@ const Video = (props) => {
 			if (props.state === "start") {
 				revealQuote();
 			}
+
+			setInterval(function () {
+				if (document.getElementById("SceneVideo").duration - document.getElementById("SceneVideo").currentTime <= 2) {
+                    clearInterval(this);
+					document.querySelector(".title-block").classList.add("reveal-hide");
+				}
+			}, 1000);
 		});
 	}
+
 	const revealQuote = () => {
 		document.querySelectorAll(".quote-block").forEach((block) => {
 			block.classList.remove("hidden", "reveal-hide");
@@ -21,7 +29,9 @@ const Video = (props) => {
 	const showContent = () => {
 		console.log("show content");
 		document.querySelector(".page").classList.remove("story-mode");
-		document.querySelector(".video-scene").style.backgroundImage=`url('${props.endStill}')`;
+		document.querySelector(
+			".video-scene"
+		).style.backgroundImage = `url('${props.endStill}')`;
 		revealQuote();
 	};
 
@@ -30,9 +40,12 @@ const Video = (props) => {
 	};
 
 	return (
-		<motion.div className="video-scene" style={myStyle} initial={{ opacity: 0 }}
+		<motion.div
+			className="video-scene"
+			style={myStyle}
+			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
-            transition={{ ease: "easeInOut", duration: .5 }}>
+			transition={{ ease: "easeInOut", duration: 0.5 }}>
 			<video
 				data-video={props.state}
 				id="SceneVideo"
