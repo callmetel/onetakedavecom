@@ -10,12 +10,19 @@ const Video = (props) => {
 				revealQuote();
 			}
 
+            setInterval(function () {
+                if(!document.querySelector(".page").classList.contains("story-mode") && document.getElementById("SceneVideo").duration - document.getElementById("SceneVideo").currentTime > 1) {
+                    clearInterval(this);
+                    hideContent();
+                }
+			}, 50);
+
 			setInterval(function () {
-				if (document.getElementById("SceneVideo").duration - document.getElementById("SceneVideo").currentTime <= 2) {
+				if (document.getElementById("SceneVideo").duration - document.getElementById("SceneVideo").currentTime <= 1.5) {
                     clearInterval(this);
 					document.querySelector(".title-block").classList.add("reveal-hide");
 				}
-			}, 1000);
+			}, 250);
 		});
 	}
 
@@ -24,6 +31,16 @@ const Video = (props) => {
 			block.classList.remove("hidden", "reveal-hide");
 			block.classList.add("reveal");
 		});
+	};
+
+    const hideContent = () => {
+		console.log("hide content");
+        document.querySelector(".page").classList.add("story-mode");
+        document.querySelector(".title").style.opacity=0;
+		document.querySelector(
+			".video-scene"
+		).style.backgroundImage = `url('${props.still}')`;
+        document.querySelectorAll(".quote-block").forEach((block) => block.classList.remove("reveal"));
 	};
 
 	const showContent = () => {
