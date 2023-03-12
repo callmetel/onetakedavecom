@@ -14,7 +14,7 @@ const Who = () => {
 		title: "Who is OneTakeDave?",
 		quote: ["I want 'em to", "love me", "for scriptures", "I've written"],
 		next: "what",
-		scenevid: process.env.sceneVideoURL + 1 + ".mp4",
+		scenevid: process.env.videoURL + 1 + ".mp4",
 		scenestill: process.env.sceneStillURL + 1 + ".jpg",
 		endstill: process.env.sceneStillURL + 2 + ".jpg",
 	};

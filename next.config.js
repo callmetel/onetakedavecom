@@ -9,6 +9,7 @@ module.exports = {
 		loopVideoURL: "https://dg09qo2eiz3mc.cloudfront.net/video/loop/",
 		sceneStillURL: "https://dg09qo2eiz3mc.cloudfront.net/still/scene/",
 		sceneVideoURL: "https://dg09qo2eiz3mc.cloudfront.net/video/scene/",
+		videoURL: "https://dg09qo2eiz3mc.cloudfront.net/video/otd",
 	},
   /*
     NOTE: this is needed for this demo because this issue

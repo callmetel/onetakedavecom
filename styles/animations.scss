@@ -183,3 +183,8 @@
         transition: opacity .1s ease, transform .25s .1s $trans-cubic;
     }
 }
+
+.showSlow {
+    opacity: 1 !important;
+    transition: opacity .25s 2.5s ease-in-out;
+}
