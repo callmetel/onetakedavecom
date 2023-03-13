@@ -19,7 +19,7 @@ const Video = (props) => {
 	};
 	const handleTimeUpdate = () => {
 		setCurrentTime(videoRef.current.currentTime);
-		console.log(currentTime);
+		// console.log(currentTime);
         //? Check if page is in "story mode"
         if(document.querySelector(".page").classList.contains("story-mode")) {
             setStoryMode(true);
@@ -131,7 +131,7 @@ const Video = (props) => {
 				onLoadedMetadata={handleDurationChange}
 				autoPlay={props.state === "start" ? true : true}
 				loop={props.state === "start" ? true : false}
-				muted={true}
+				muted={props.state === "start" ? true : false}
 			/>
 		</motion.div>
 	);

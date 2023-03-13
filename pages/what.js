@@ -14,9 +14,7 @@ const What = () => {
 		title: "What is his purpose?",
 		quote: ["I quit the", "rat race early", "I aint runnin'", "for fees"],
 		next: "where",
-		loopvid: process.env.loopVideoURL + 2 + ".mp4",
-		loopstill: process.env.loopStillURL + 2 + ".jpg",
-		scenevid: process.env.sceneVideoURL + 2 + ".mp4",
+		scenevid: process.env.videoURL + 2 + ".mp4",
 		scenestill: process.env.sceneStillURL + 2 + ".jpg",
 		endstill: process.env.sceneStillURL + 3 + ".jpg",
 	};
