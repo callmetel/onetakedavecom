@@ -80,6 +80,11 @@ button {
         opacity: 0;
         transform: translateX(-10%);
     }
+
+    &.start {
+        opacity: 0;
+        animation-delay: .5s;
+    }
 }
 
 .story-mode {

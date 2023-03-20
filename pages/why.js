@@ -6,42 +6,19 @@ import Discover from "../components/Discover";
 import { Button, DiscoverButton } from "../components/Buttons";
 import { useRef } from "react";
 
-const Why = () => {
+const Why = (props) => {
 	const ref = useRef();
-	const JourneyProps = {
-		index: 5,
-		state: "why",
-		title: "Why does he do it?",
-		quote: [
-			"I feel alive",
-			"when i'm rappin'",
-			"i feel awake",
-			"when i'm learnin'",
-		],
-		next: "how",
-		loopvid: process.env.loopVideoURL + 5 + ".mp4",
-		loopstill: process.env.loopStillURL + 5 + ".jpg",
-		scenevid: process.env.sceneVideoURL + 5 + ".mp4",
-		scenestill: process.env.sceneStillURL + 5 + ".jpg",
-		endstill: process.env.sceneStillURL + 6 + ".jpg",
-	};
-
 	return (
 		<div className="page">
 			<main className="main">
-				<Title title={JourneyProps.title} />
-				<Video
-					link={JourneyProps.scenevid}
-					still={JourneyProps.scenestill}
-					endStill={JourneyProps.endstill}
-					state={JourneyProps.state}
-				/>
+				<Title title={props.location.title} />
+				<Video {...props} />
 				<div className="content">
-					<Quote {...JourneyProps.quote} />
-					<Button name="How" link="/how" onClick={() => ref.current.log()} />
-					<DiscoverButton state={JourneyProps.state} />
+					<Quote {...props.location.quote} />
+					<Button name={props.location.next} link={"/" + props.location.next} onClick={() => ref.current.log()} />
+					<DiscoverButton state={props.location.state} />
 				</div>
-				<Discover state={JourneyProps.state} />
+				<Discover state={props.location.state} />
 			</main>
 		</div>
 	);

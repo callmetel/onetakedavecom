@@ -14,14 +14,16 @@ export const Button = forwardRef((props, ref) => {
 		quoteBlock.forEach((block) => block.classList.add("reveal-hiding"));
 		const button = e.target.classList.contains("text") ? e.target.closest("button"):e.target;
 		button.classList.add("no-delay","hide");
+		console.log(props.link);
 		setTimeout(function () {
 			router.push(props.link);
+			sessionStorage.setItem("routerPushTriggered","true");
 		}, 600);
 	};
 
 	return (
 		<motion.button
-			className="changePage redwipe"
+			className={`changePage redwipe ${props.classes}`}
 			onClick={onClick}
 			title={props.name}>
 			<span className="text">
@@ -38,7 +40,7 @@ export const Button = forwardRef((props, ref) => {
 
 export const DiscoverButton = (props) => (
 	<motion.button
-		className="discoverBtn"
+		className={`discoverBtn ${props.classes}`}
 		onClick={() => console.log("discover button clicked")}>
 		<span className="text">Discover</span>
 		<span className="block"></span>

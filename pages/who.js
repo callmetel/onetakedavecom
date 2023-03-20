@@ -6,36 +6,24 @@ import Discover from "../components/Discover";
 import { Button, DiscoverButton } from "../components/Buttons";
 import { useRef } from "react";
 
-const Who = () => {
-    const ref = useRef();
-	const JourneyProps = {
-		index: 1,
-		state: "who",
-		title: "Who is OneTakeDave?",
-		quote: ["I want 'em to", "love me", "for scriptures", "I've written"],
-		next: "what",
-		scenevid: process.env.videoURL + 1 + ".mp4",
-		scenestill: process.env.sceneStillURL + 1 + ".jpg",
-		endstill: process.env.sceneStillURL + 2 + ".jpg",
-	};
-
+const Who = (props) => {
+	const ref = useRef();
 	return (
 		<div className="page">
 			<main className="main">
-				<Title title={JourneyProps.title} />
-				<Video
-					link={JourneyProps.scenevid}
-					still={JourneyProps.scenestill}
-					endStill={JourneyProps.endstill}
-					state={JourneyProps.state}
-				/>
+				<Title title={props.location.title} />
+				<Video {...props} />
 				<div className="content">
-					<Quote {...JourneyProps.quote} />
-                    <Button name="What" link="/what" onClick={() => ref.current.log()} />
+					<Quote {...props.location.quote} />
+					<Button
+						name={props.location.next}
+						link={"/" + props.location.next}
+						onClick={() => ref.current.log()}
+					/>
 					<DiscoverButton />
 				</div>
 
-				<Discover state={JourneyProps.state} />
+				<Discover state={props.location.state} />
 			</main>
 		</div>
 	);

@@ -1,5 +1,6 @@
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 const variants = {
 	fadeIn: {
@@ -46,9 +47,10 @@ const SceneTransition = ({ children }) => {
 					animate={["inactive"]}
 					exit={["fadeOut"]}
 					onAnimationStart={(definition) => {
-						console.log("Started animating", definition);
-						if (definition === "inactive") {
-						document.querySelectorAll(".page").forEach((page) => page.classList.add("story-mode"));
+						if (definition === "inactive" && !children.props.popstate) {
+							document
+								.querySelectorAll(".page")
+								.forEach((page) => page.classList.add("story-mode"));
 						}
 					}}
 					onAnimationComplete={(definition) => {

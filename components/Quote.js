@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 export function QuoteAlt(props) {
 	return (
@@ -14,6 +15,14 @@ export function QuoteAlt(props) {
 }
 
 export default function Quote(props) {
+	// useEffect(() => {
+	// 	if (sessionStorage.getItem("routerPushTriggered") === "false") {
+	// 		document.querySelectorAll(".quote-block").forEach((block) => {
+	// 			block.classList.remove("hidden", "reveal-hide");
+	// 			block.classList.add("reveal");
+	// 		});
+	// 	}
+	// });
 	return (
 		<div className="quote">
 			{Object.values(props).map((block, index) => (

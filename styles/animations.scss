@@ -104,7 +104,7 @@
 
 // Revealer
 .block-revealer {
-    transform: translateX(-100%);
+    transform: translateX(-140%);
     transition: transform 250ms ease-out;
 }
 
@@ -187,4 +187,40 @@
 .showSlow {
     opacity: 1 !important;
     transition: opacity .25s 2.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: .25s;
+    animation: fadeIn .25s forwards;
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-10%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+
+.fadeInLeft {
+    animation-name: fadeInLeft;
+    animation-duration: .5s;
+    animation: fadeInLeft .5s forwards;
 }

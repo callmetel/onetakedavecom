@@ -1,33 +1,125 @@
-import { useState,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import Nav from "../components/Nav";
 import SceneTransition from "../components/SceneTransition";
 import "../styles/_app.scss";
 
-function MyApp({ Component, pageProps }) {
-  const FullVideo = () => {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const VideoRef = useRef(null);
-    const showContent = () => {
-		console.log("show content");
-	};
-	return (
-			<video
-        ref={VideoRef}
-				id="main-video"
-				src={`${process.env.sceneVideoURL}otd-site-vid-2-opt.mp4`}
-				preload="auto"
-				playsInline
-				onEnded={showContent}
-			/>
-	);
-};
+function Page({ Component, pageProps }) {
+	const router = useRouter();
+	const [popstatePressed, setPopstatePressed] = useState(false);
+	useEffect(() => {
+		router.beforePopState(({ url, as, options }) => {
+			setPopstatePressed(true);
+		});
+		router.events.on("routeChangeStart", (url, { shallow }) => {
+			setPopstatePressed(false);
+			console.log(`routing to ${url}`, `is shallow routing: ${shallow}`);
+		});
+	}, [router]);
+	pageProps.popstate = popstatePressed;
+	let locationData = {};
+	switch (router.pathname.substring(1)) {
+		case "who":
+			locationData = {
+				title: "Who is OneTakeDave?",
+				quote: ["I want 'em to", "love me", "for scriptures", "I've written"],
+				next: "what",
+				endstill: process.env.sceneStillURL + 2 + ".jpg",
+				vid: process.env.videoURL + 1 + ".mp4",
+				still: process.env.sceneStillURL + 1 + ".jpg",
+			};
+			break;
+
+		case "what":
+			locationData = {
+				title: "What is his purpose?",
+				quote: ["I quit the", "rat race early", "I aint runnin'", "for fees"],
+				next: "where",
+				endstill: process.env.sceneStillURL + 3 + ".jpg",
+				vid: process.env.videoURL + 2 + ".mp4",
+				still: process.env.sceneStillURL + 2 + ".jpg",
+			};
+			break;
+
+		case "where":
+			locationData = {
+				title: "Where is he going?",
+				quote: [
+					"Flyin' through",
+					"these broken",
+					"blocks I'm a",
+					"master at tetris",
+				],
+				next: "when",
+				endstill: process.env.sceneStillURL + 4 + ".jpg",
+				vid: process.env.videoURL + 3 + ".mp4",
+				still: process.env.sceneStillURL + 3 + ".jpg",
+			};
+			break;
+
+		case "when":
+			locationData = {
+				title: "When did it start?",
+				quote: [
+					"All my life",
+					"i had to grind and",
+					"i got a lot more",
+					"grindin' to go",
+				],
+				next: "why",
+				endstill: process.env.sceneStillURL + 5 + ".jpg",
+				vid: process.env.videoURL + 4 + ".mp4",
+				still: process.env.sceneStillURL + 4 + ".jpg",
+			};
+			break;
+
+		case "why":
+			locationData = {
+				title: "Why does he do it?",
+				quote: [
+					"I feel alive",
+					"when i'm rappin'",
+					"i feel awake",
+					"when i'm learnin'",
+				],
+				next: "how",
+				endstill: process.env.sceneStillURL + 6 + ".jpg",
+				vid: process.env.videoURL + 5 + ".mp4",
+				still: process.env.sceneStillURL + 5 + ".jpg",
+			};
+			break;
+
+		case "how":
+			locationData = {
+				state: "how",
+				title: "How will he make it?",
+				quote: ["You either", "seekin' pleasure", "or it's profit"],
+				next: "who",
+				vid: process.env.videoURL + 6 + ".mp4",
+				still: process.env.sceneStillURL + 6 + ".jpg",
+				endstill: process.env.sceneStillURL + 6 + ".jpg",
+			};
+			break;
+
+		default:
+			locationData = {
+				state: "start",
+				quote: ["ONE WAY", "OR ANOTHER", "WORD TO MOTHA", "WE GON' GET IT"],
+				next: "who",
+				vid: process.env.loopVideoURL + 0 + ".mp4",
+				still: process.env.loopStillURL + 6 + ".jpg",
+			};
+			break;
+	}
+	pageProps.location = locationData;
+
 	return (
 		<div className="app-container">
-			<SceneTransition>
+			<SceneTransition {...pageProps}>
 				<Component {...pageProps} />
 			</SceneTransition>
 		</div>
 	);
 }
 
-export default MyApp;
+export default Page;
