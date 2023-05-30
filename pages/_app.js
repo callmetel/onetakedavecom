@@ -4,23 +4,29 @@ import Nav from "../components/Nav";
 import SceneTransition from "../components/SceneTransition";
 import "../styles/_app.scss";
 
-function Page({ Component, pageProps }) {
+function Page({ Component, pageProps })
+{
 	const router = useRouter();
 	const [popstatePressed, setPopstatePressed] = useState(false);
-	useEffect(() => {
-		router.beforePopState(({ url, as, options }) => {
+	useEffect(() =>
+	{
+		router.beforePopState(({ url, as, options }) =>
+		{
 			setPopstatePressed(true);
 		});
-		router.events.on("routeChangeStart", (url, { shallow }) => {
+		router.events.on("routeChangeStart", (url, { shallow }) =>
+		{
 			setPopstatePressed(false);
 			console.log(`routing to ${url}`, `is shallow routing: ${shallow}`);
 		});
 	}, [router]);
 	pageProps.popstate = popstatePressed;
 	let locationData = {};
-	switch (router.pathname.substring(1)) {
+	switch (router.pathname.substring(1))
+	{
 		case "who":
 			locationData = {
+				state: "who",
 				title: "Who is OneTakeDave?",
 				quote: ["I want 'em to", "love me", "for scriptures", "I've written"],
 				next: "what",
@@ -32,6 +38,7 @@ function Page({ Component, pageProps }) {
 
 		case "what":
 			locationData = {
+				state: "what",
 				title: "What is his purpose?",
 				quote: ["I quit the", "rat race early", "I aint runnin'", "for fees"],
 				next: "where",
@@ -43,6 +50,7 @@ function Page({ Component, pageProps }) {
 
 		case "where":
 			locationData = {
+				state: "where",
 				title: "Where is he going?",
 				quote: [
 					"Flyin' through",
@@ -59,6 +67,7 @@ function Page({ Component, pageProps }) {
 
 		case "when":
 			locationData = {
+				state: "when",
 				title: "When did it start?",
 				quote: [
 					"All my life",
@@ -75,6 +84,7 @@ function Page({ Component, pageProps }) {
 
 		case "why":
 			locationData = {
+				state: "why",
 				title: "Why does he do it?",
 				quote: [
 					"I feel alive",
@@ -97,7 +107,7 @@ function Page({ Component, pageProps }) {
 				next: "who",
 				vid: process.env.videoURL + 6 + ".mp4",
 				still: process.env.sceneStillURL + 6 + ".jpg",
-				endstill: process.env.sceneStillURL + 6 + ".jpg",
+				endstill: process.env.sceneStillURL + 7 + ".jpg",
 			};
 			break;
 

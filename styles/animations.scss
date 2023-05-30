@@ -224,3 +224,20 @@
     animation-duration: .5s;
     animation: fadeInLeft .5s forwards;
 }
+
+@keyframes fadeOut {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.fadeOut {
+    animation-name: fadeOut;
+    animation-duration: .25s;
+    animation: fadeOut .25s forwards;
+}

@@ -2,12 +2,30 @@
     @include fixed(top 0 left 0);
     @include size(100vw, 100vh);
     @include flex-center;
-    background-size: auto;
-    background-position: center;
+    background-size: 150%;
+    background-position: 51% center;
     background-repeat: no-repeat;
     z-index: 0;
 
+    .video-placeholder {
+        @include min(100%, 100%);
+        position: fixed;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        z-index: 1;
+        aspect-ratio: 16/9;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 150%;
+    }
+
     .video {
-        min-height: 100%;
+        @include min(100%, 100%);
+        position: fixed;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        z-index: 2;
     }
 }

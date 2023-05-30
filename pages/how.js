@@ -4,15 +4,17 @@ import Title from "../components/Title";
 import Quote from "../components/Quote";
 import Discover from "../components/Discover";
 import { Button, DiscoverButton } from "../components/Buttons";
-import { useRef } from "react";
+import React, { useRef } from "react";
 
-const How = (props) => {
+const How = (props) =>
+{
 	const ref = useRef();
+	const pageRef = React.createRef();
 	return (
-		<div className="page">
+		<div className="page" ref={pageRef} data-page={props.location.state}>
 			<main className="main">
 				<Title title={props.location.title} />
-				<Video {...props} />
+				<Video {...props} page={pageRef} />
 				<div className="content">
 					<Quote {...props.location.quote} />
 					<Button name="Restart" link={`/${props.location.next}`} onClick={() => ref.current.log()} />
