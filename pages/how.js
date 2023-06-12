@@ -33,7 +33,7 @@ const How = (props) =>
 					<DiscoverButton />
 				</div>
 				<Discover state={props.location.state} />
-				<BikeRoute state={props.location.state} time={route.time} duration={route.duration} />
+				<BikeRoute state={props.location.state} time={route.time} duration={route.duration} popstate={props.popstate} />
 			</main>
 		</div>
 	);

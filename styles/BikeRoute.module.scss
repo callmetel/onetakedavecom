@@ -11,5 +11,12 @@
         width: 16.667%;
         height: 3px;
         background-color: rgba(0, 0, 0, 0.3);
+
+        .bar {
+            background-color: $red;
+            height: 100%;
+            width: 0%;
+            transition: width .25s ease-in-out;
+        }
     }
 }
