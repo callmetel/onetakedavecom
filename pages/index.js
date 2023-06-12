@@ -8,19 +8,12 @@ export default function Home(props)
 {
 	const ref = useRef();
 	const pageRef = React.createRef();
-	useEffect(() =>
+	let [route, setRoute] = useState({ "time": 0, "duration": 0 });
+	const handleRoute = (routeData) =>
 	{
-		const revealQuote = () =>
-		{
-			document.querySelectorAll(".quote-block").forEach((block) =>
-			{
-				block.classList.remove("hidden", "reveal-hide");
-				block.classList.add("reveal");
-			});
-		};
-		revealQuote();
-	});
-	const addtlProps = { "page": pageRef };
+		setRoute(routeData);
+	}
+	const addtlProps = { "page": pageRef, "routeCallback": handleRoute };
 
 	return (
 		<div className="page" ref={pageRef}>

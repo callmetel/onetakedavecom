@@ -15,7 +15,8 @@ const Video = (props) =>
 	const [duration, setDuration] = useState(0);
 	const [volume, setVolume] = useState(1);
 
-	console.log(props);
+	if (props.location.state !== "start")
+		console.log(props);
 
 	const handlePlayPause = () =>
 	{
@@ -33,12 +34,6 @@ const Video = (props) =>
 	const handleTimeUpdate = () =>
 	{
 		setCurrentTime(videoRef.current.currentTime);
-
-		if (props.location.state === "start" || !props.popstate)
-		{
-			revealQuote();
-			console.log("yup");
-		}
 
 		//? Check if page is in "story mode"
 		if (props.page.current.classList.contains("story-mode"))
@@ -64,11 +59,6 @@ const Video = (props) =>
 	const handleDurationChange = () =>
 	{
 		setDuration(videoRef.current.duration);
-		//? If on home page reveal quote
-		if (props.location.state === "start")
-		{
-			revealQuote();
-		}
 	};
 	const handleVolumeChange = (event) =>
 	{
@@ -122,6 +112,13 @@ const Video = (props) =>
 
 	useEffect(() =>
 	{
+		//? If on home page or page is refreshed, reveal quote
+		if (props.location.state === "start" || !props.popstate)
+		{
+			revealQuote();
+			console.log("yup");
+		}
+
 		if (videoRef.current)
 		{
 			setDimensions({
@@ -185,7 +182,7 @@ const Video = (props) =>
 				autoPlay={true}
 				loop={props.location.state === "start" ? true : false}
 				muted={props.location.state === "start" ? true : false}
-				style={!props.popstate ? { "opacity": 0 } : {}}
+				style={!props.popstate && props.location.state !== "start" ? { "opacity": 0 } : {}}
 			/>
 			<div
 				ref={placeholderRef}
