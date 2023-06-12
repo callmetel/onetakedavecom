@@ -24,7 +24,7 @@ const When = (props) =>
 				<Title title={props.location.title} />
 				<Video {...props} {...addtlProps} />
 				<div className="content">
-					<Quote {...props.location.quote} />
+					<Quote {...props.location.quote}{...props.popstate} />
 					<Button
 						name={props.location.next}
 						link={"/" + props.location.next}

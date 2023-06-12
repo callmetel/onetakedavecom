@@ -59,7 +59,7 @@ const Video = (props) =>
 	{
 		setDuration(videoRef.current.duration);
 		//? If on home page reveal quote
-		if (props.location.state === "start")
+		if (props.location.state === "start" || !props.popstate)
 		{
 			revealQuote();
 		}
