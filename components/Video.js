@@ -17,6 +17,7 @@ const Video = (props) =>
 	let currBg = (props.page.current && props.page.current.classList.contains("story-mode")) ? playingBg : endedBg;
 
 	console.log(props);
+	console.log((props.page.current && props.page.current.classList.contains("story-mode")));
 
 	const handlePlayPause = () =>
 	{
