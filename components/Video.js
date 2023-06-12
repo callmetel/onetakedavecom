@@ -14,6 +14,7 @@ const Video = (props) =>
 	const [storyMode, setStoryMode] = useState(false);
 	const [duration, setDuration] = useState(0);
 	const [volume, setVolume] = useState(1);
+	let currBg = storyMode ? playingBg : endedBg;
 
 	console.log(props);
 
@@ -159,7 +160,7 @@ const Video = (props) =>
 	return (
 		<motion.div
 			className="video-scene"
-			style={storyMode ? playingBg : endedBg}
+			style={currBg}
 			initial={{ opacity: 0 }
 			}
 			animate={{ opacity: 1 }}
@@ -184,7 +185,7 @@ const Video = (props) =>
 				ref={placeholderRef}
 				id="VideoPlaceholder"
 				className="video-placeholder"
-				style={{ ...playingBg, width: dimensions.width, height: dimensions.height }}
+				style={{ ...currBg, width: dimensions.width, height: dimensions.height }}
 			/>
 		</motion.div>
 	);
