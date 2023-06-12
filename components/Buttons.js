@@ -2,22 +2,26 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { forwardRef, useImperativeHandle } from "react";
 
-export const Button = forwardRef((props, ref) => {
+export const Button = forwardRef((props, ref) =>
+{
 	useImperativeHandle(ref, () => ({
-		log() {
+		log()
+		{
 			console.log(ref);
 		},
 	}));
 	const router = useRouter();
-	const onClick = (e) => {
+	const onClick = (e) =>
+	{
 		const quoteBlock = document.querySelectorAll(".quote-block");
 		quoteBlock.forEach((block) => block.classList.add("reveal-hiding"));
-		const button = e.target.classList.contains("text") ? e.target.closest("button"):e.target;
-		button.classList.add("no-delay","hide");
+		const button = e.target.classList.contains("text") ? e.target.closest("button") : e.target;
+		button.classList.add("no-delay", "hide");
 		console.log(props.link);
-		setTimeout(function () {
+		setTimeout(function ()
+		{
 			router.push(props.link);
-			sessionStorage.setItem("routerPushTriggered","true");
+			sessionStorage.setItem("routerPushTriggered", "true");
 		}, 600);
 	};
 
@@ -30,8 +34,8 @@ export const Button = forwardRef((props, ref) => {
 				{props.name === "Restart"
 					? "Ride Again"
 					: props.name === "Start"
-					? "Start Riding"
-					: "Keep Riding"}
+						? "Start Riding"
+						: "Keep Riding"}
 			</span>
 			<span className="block"></span>
 		</motion.button>

@@ -7,17 +7,15 @@ const Video = (props) =>
 	const videoRef = useRef(null);
 	const placeholderRef = useRef();
 	const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-	const playingBg = { backgroundImage: `url('${props.location.still}')`, };
-	const endedBg = { backgroundImage: `url('${props.location.still}')`, };
+	const currBgImg = !props.popstate ? props.location.endstill : props.location.still;
+	const bgCSS = { backgroundImage: `url('${currBgImg}')`, };
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [storyMode, setStoryMode] = useState(false);
 	const [duration, setDuration] = useState(0);
 	const [volume, setVolume] = useState(1);
-	let currBg = (props.page.current && props.page.current.classList.contains("story-mode")) ? playingBg : endedBg;
 
 	console.log(props);
-	console.log((props.page.current && props.page.current.classList.contains("story-mode")));
 
 	const handlePlayPause = () =>
 	{
@@ -37,7 +35,6 @@ const Video = (props) =>
 		setCurrentTime(videoRef.current.currentTime);
 
 		//? Check if page is in "story mode"
-		// console.log(props.page.current);
 		if (props.page.current.classList.contains("story-mode"))
 		{
 			setStoryMode(true);
@@ -56,6 +53,7 @@ const Video = (props) =>
 		{
 			document.querySelector(".title-block").classList.add("reveal-hide");
 		}
+		props.routeCallback({ "time": currentTime, "duration": duration });
 	};
 	const handleDurationChange = () =>
 	{
@@ -161,7 +159,7 @@ const Video = (props) =>
 	return (
 		<motion.div
 			className="video-scene"
-			style={currBg}
+			style={bgCSS}
 			initial={{ opacity: 0 }
 			}
 			animate={{ opacity: 1 }}
@@ -181,12 +179,13 @@ const Video = (props) =>
 				autoPlay={true}
 				loop={props.location.state === "start" ? true : false}
 				muted={props.location.state === "start" ? true : false}
+				style={!props.popstate ? { "opacity": 0 } : {}}
 			/>
 			<div
 				ref={placeholderRef}
 				id="VideoPlaceholder"
 				className="video-placeholder"
-				style={{ ...currBg, width: dimensions.width, height: dimensions.height }}
+				style={{ ...bgCSS, width: dimensions.width, height: dimensions.height }}
 			/>
 		</motion.div>
 	);

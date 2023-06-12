@@ -3,6 +3,7 @@ import { BikeStop } from "/components/BikeStop";
 
 export const BikeRoute = (props) =>
 {
+    console.log(props);
     const BikeStops = ["who", "what", "where", "when", "why", "how"];
     const currWidth = `${Math.ceil((props.time / props.duration) * 100)}%`;
 

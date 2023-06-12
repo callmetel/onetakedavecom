@@ -16,8 +16,9 @@ function Page({ Component, pageProps })
 		});
 		router.events.on("routeChangeStart", (url, { shallow }) =>
 		{
-			setPopstatePressed(false);
+			// setPopstatePressed(false);
 			console.log(`routing to ${url}`, `is shallow routing: ${shallow}`);
+			setPopstatePressed(true);
 		});
 	}, [router]);
 	pageProps.popstate = popstatePressed;

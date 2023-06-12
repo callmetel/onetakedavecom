@@ -33,7 +33,8 @@ const variants = {
  * Read the blog post here:
  * https://letsbuildui.dev/articles/animated-page-transitions-in-nextjs
  */
-const SceneTransition = ({ children }) => {
+const SceneTransition = ({ children }) =>
+{
 	const { asPath } = useRouter();
 	const shouldReduceMotion = useReducedMotion();
 
@@ -46,20 +47,25 @@ const SceneTransition = ({ children }) => {
 					initial="fadeIn"
 					animate={["inactive"]}
 					exit={["fadeOut"]}
-					onAnimationStart={(definition) => {
-						if (definition === "inactive" && !children.props.popstate) {
+					onAnimationStart={(definition) =>
+					{
+						if (definition === "inactive" && children.props.popstate)
+						{
 							document
 								.querySelectorAll(".page")
 								.forEach((page) => page.classList.add("story-mode"));
 						}
 					}}
-					onAnimationComplete={(definition) => {
+					onAnimationComplete={(definition) =>
+					{
 						console.log("Completed animating", definition);
-						if (definition === "fadeOut") {
+						if (definition === "fadeOut")
+						{
 							// document.querySelectorAll(".page").forEach((page) => page.classList.add("story-mode"));
 						}
 
-						if (definition === "inactive") {
+						if (definition === "inactive")
+						{
 							console.log("inactive");
 							// document.querySelector(".page").classList.add("story-mode");
 						}
