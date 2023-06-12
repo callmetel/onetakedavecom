@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import { BikeRoute } from "/components/BikeRoute";
 
 const Video = (props) =>
 {
 	const videoRef = useRef(null);
 	const placeholderRef = useRef();
 	const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-	const bgStyle = { backgroundImage: `url('${props.location.still}')`, };
+	const playingBg = { backgroundImage: `url('${props.location.still}')`, };
+	const endedBg = { backgroundImage: `url('${props.location.still}')`, };
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [storyMode, setStoryMode] = useState(false);
@@ -27,12 +29,13 @@ const Video = (props) =>
 			setIsPlaying(true);
 		}
 	};
-	// console.log(videoRef.current);
+
 	const handleTimeUpdate = () =>
 	{
 		setCurrentTime(videoRef.current.currentTime);
-		// console.log(currentTime);
+
 		//? Check if page is in "story mode"
+		// console.log(props.page.current);
 		if (props.page.current.classList.contains("story-mode"))
 		{
 			setStoryMode(true);
@@ -156,8 +159,9 @@ const Video = (props) =>
 	return (
 		<motion.div
 			className="video-scene"
-			style={bgStyle}
-			initial={{ opacity: 0 }}
+			style={storyMode ? playingBg : endedBg}
+			initial={{ opacity: 0 }
+			}
 			animate={{ opacity: 1 }}
 			transition={{ ease: "easeInOut", duration: 0.5 }}>
 			<video
@@ -180,7 +184,7 @@ const Video = (props) =>
 				ref={placeholderRef}
 				id="VideoPlaceholder"
 				className="video-placeholder"
-				style={{ ...bgStyle, width: dimensions.width, height: dimensions.height }}
+				style={{ ...playingBg, width: dimensions.width, height: dimensions.height }}
 			/>
 		</motion.div>
 	);

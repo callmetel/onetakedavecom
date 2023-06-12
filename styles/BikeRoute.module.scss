@@ -1,0 +1,15 @@
+.BikeRoute {
+    width: 90vw;
+    @include fixed(bottom 10% left 50%);
+    z-index: 1000;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .BikeStop {
+        width: 16.667%;
+        height: 3px;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+}
