@@ -45,6 +45,7 @@ const Video = (props) =>
 		{
 			setStoryMode(false);
 			setIsPlaying(false);
+			currBg = endedBg;
 		}
 
 		//? If the video is ending in 1.5s start hiding the title
