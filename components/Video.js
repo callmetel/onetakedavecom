@@ -14,7 +14,7 @@ const Video = (props) =>
 	const [storyMode, setStoryMode] = useState(false);
 	const [duration, setDuration] = useState(0);
 	const [volume, setVolume] = useState(1);
-	let currBg = storyMode ? playingBg : endedBg;
+	let currBg = (props.page.current && props.page.current.classList.contains("story-mode")) ? playingBg : endedBg;
 
 	console.log(props);
 
@@ -45,7 +45,6 @@ const Video = (props) =>
 		{
 			setStoryMode(false);
 			setIsPlaying(false);
-			currBg = endedBg;
 		}
 
 		//? If the video is ending in 1.5s start hiding the title
