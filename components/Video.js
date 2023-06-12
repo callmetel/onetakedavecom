@@ -34,6 +34,12 @@ const Video = (props) =>
 	{
 		setCurrentTime(videoRef.current.currentTime);
 
+		if (props.location.state === "start" || !props.popstate)
+		{
+			revealQuote();
+			console.log("yup");
+		}
+
 		//? Check if page is in "story mode"
 		if (props.page.current.classList.contains("story-mode"))
 		{
@@ -59,7 +65,7 @@ const Video = (props) =>
 	{
 		setDuration(videoRef.current.duration);
 		//? If on home page reveal quote
-		if (props.location.state === "start" || !props.popstate)
+		if (props.location.state === "start")
 		{
 			revealQuote();
 		}
