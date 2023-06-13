@@ -3,6 +3,7 @@
     @include fixed(bottom 5% left 50%);
     z-index: 1000;
     transform: translateX(-50%);
+    transform: translateX(-50%) scale(.9);
     display: flex;
     justify-content: center;
     align-items: center;
