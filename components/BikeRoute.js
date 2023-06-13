@@ -33,7 +33,7 @@ export const BikeRoute = (props) =>
                     if (i > BikeStops.indexOf(props.state))
                         var locationWidth = "0%";
 
-                    return (<BikeStop key={i} location={stop} width={locationWidth} />);
+                    return (<BikeStop key={i} state={props.state} location={stop} width={locationWidth} />);
                 })
             }
         </div>
