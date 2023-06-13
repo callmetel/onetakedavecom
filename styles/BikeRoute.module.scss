@@ -1,6 +1,6 @@
 .BikeRoute {
-    width: 90vw;
-    @include fixed(bottom 10% left 50%);
+    width: 70vw;
+    @include fixed(bottom 5% left 50%);
     z-index: 1000;
     transform: translateX(-50%);
     display: flex;
@@ -9,14 +9,27 @@
 
     .BikeStop {
         width: 16.667%;
-        height: 3px;
+        height: 2px;
         background-color: rgba(0, 0, 0, 0.3);
 
         .bar {
             background-color: $red;
             height: 100%;
             width: 0%;
-            transition: width .25s ease-in-out;
+            transition: width .3s ease-in-out;
         }
+    }
+
+    .RouteMarker {
+        @include absolute(top -60px left 0);
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        transition: width .35s ease-in;
+
+        .DaveMarker {
+            width: 60px;
+        }
+
     }
 }

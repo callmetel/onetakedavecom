@@ -8,6 +8,7 @@ function Page({ Component, pageProps })
 {
 	const router = useRouter();
 	const [popstatePressed, setPopstatePressed] = useState(false);
+	const [routeChanged, setRouteChanged] = useState(false);
 	useEffect(() =>
 	{
 		router.beforePopState(({ url, as, options }) =>
@@ -19,9 +20,17 @@ function Page({ Component, pageProps })
 			// setPopstatePressed(false);
 			console.log(`routing to ${url}`, `is shallow routing: ${shallow}`);
 			setPopstatePressed(true);
+			setRouteChanged(true);
+		});
+		router.events.on("routeChangeComplete", (url, { shallow }) =>
+		{
+			// setPopstatePressed(false);
+			console.log(`routed to ${url}`, `is shallow routing: ${shallow}`);
+			setRouteChanged(false);
 		});
 	}, [router]);
 	pageProps.popstate = popstatePressed;
+	pageProps.routeChanged = routeChanged;
 	let locationData = {};
 	switch (router.pathname.substring(1))
 	{
