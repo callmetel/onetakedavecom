@@ -44,9 +44,8 @@ export const Button = forwardRef((props, ref) =>
 
 export const DiscoverButton = (props) => (
 	<motion.button
-		className={`discoverBtn ${props.classes}`}
-		onClick={() => console.log("discover button clicked")}>
-		<span className="text">Discover</span>
-		<span className="block"></span>
+		className={`discoverBtn${props.classes == undefined ? "" : " " + props.classes}`}
+		onClick={() => props.click()}>
+		<span className="text">Learn<br />more<span className="plus">+</span></span>
 	</motion.button>
 );

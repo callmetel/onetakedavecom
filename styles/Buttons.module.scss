@@ -40,14 +40,33 @@ button {
     }
 
     &.discoverBtn {
-        @include absolute(top -5% right -5%);
-        background: $red;
+        @include absolute(top -5% right -9%);
         opacity: 1;
         transform: translateX(0);
-        transition: all .75s .5s $trans-cubic;
+        transition: all .5s $trans-cubic;
+        font-size: 1.25em;
+        color: $red;
+        background: transparent;
+        padding: 0;
+        letter-spacing: -.5px;
+        text-align: left;
 
-        .block {
-            background: $black;
+        .text {
+            .plus {
+                font-size: 35px;
+                position: absolute;
+                transform: translate(3px, -8px);
+                transition: all .5s $trans-cubic;
+            }
+        }
+
+        &:hover {
+            .text {
+                .plus {
+                    transform: translate(3px, -8px) rotate(45deg);
+                    color: $black;
+                }
+            }
         }
     }
 

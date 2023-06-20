@@ -18,6 +18,11 @@ const Who = (props) =>
 		console.log(routeData);
 	}
 	const addtlProps = { "page": pageRef, "routeCallback": handleRoute };
+	let [isOpen, setState] = useState(false);
+	function handleDiscover()
+	{
+		setState(true);
+	}
 
 	return (
 		<div className="page" ref={pageRef} data-page={props.location.state}>
@@ -31,9 +36,9 @@ const Who = (props) =>
 						link={"/" + props.location.next}
 						onClick={() => ref.current.log()}
 					/>
-					<DiscoverButton />
+					<DiscoverButton click={handleDiscover} />
 				</div>
-				<Discover state={props.location.state} />
+				<Discover state={props.location.state} isOpen={isOpen} />
 				<BikeRoute state={props.location.state} time={route.time} duration={route.duration} popstate={props.popstate} clicked={props.routeChanged} />
 			</main>
 		</div>

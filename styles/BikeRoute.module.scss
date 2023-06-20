@@ -103,6 +103,53 @@
     }
 }
 
-.page.story-mode .BikeStop.active~.BikeStop {
-    opacity: .1;
+.page.story-mode {
+    .BikeRoute {
+        &:before {
+            background-color: $white;
+        }
+
+        &:after {
+            color: $white;
+        }
+
+        .BikeStop {
+            .label {
+                color: $white;
+            }
+
+            .bar {
+                background-color: $white;
+            }
+
+            .mark {
+                background-color: $white;
+            }
+
+            &.active {
+                background-color: rgba(231, 231, 231, .1);
+
+                .bar {
+                    background-color: $white;
+                }
+
+                .mark {
+                    background-color: rgba(231, 231, 231, .1);
+                }
+
+                .label {
+                    color: rgba(231, 231, 231, .1);
+                }
+
+                &~.BikeStop {
+                    opacity: .1;
+                    background-color: #e7e7e7;
+
+                    .label {
+                        color: #e7e7e7;
+                    }
+                }
+            }
+        }
+    }
 }
