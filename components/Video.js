@@ -1,73 +1,119 @@
 import { motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
-import { BikeRoute } from "/components/BikeRoute";
+import { useState, useEffect, useRef, useReducer } from "react";
+
+const reducer = (state, action) =>
+{
+	switch (action.type)
+	{
+		case 'dimensions': {
+			return {
+				...state,
+				dimensions: {
+					width: state.videoElement?.current?.getBoundingClientRect()?.width,
+					height: state.videoElement?.current?.getBoundingClientRect()?.height,
+				}
+			};
+		}
+		case 'ready': {
+			return {
+				...state,
+				isReady: true
+			};
+		}
+		case 'playing': {
+			if (state.isReady)
+			{
+				// state.videoElement?.current?.play();
+				return {
+					...state,
+					isPlaying: true
+				};
+			}
+			return state;
+		}
+		case 'ended': {
+			if (state.videoElement?.current?.currentTime === state.videoElement?.current?.duration)
+			{
+				return {
+					...state,
+					isPlaying: false
+				};
+			}
+			return state;
+		}
+		case 'current_time': {
+			return {
+				...state,
+				currentTime: state.videoElement?.current?.currentTime
+			};
+		}
+		case 'duration': {
+			return {
+				...state,
+				duration: state.videoElement?.current?.duration
+			};
+		}
+		case 'muted': {
+			return {
+				...state,
+				isMuted: state.videoElement?.current?.muted
+			};
+		}
+		case 'video': {
+			return {
+				...state,
+				videoElement: React.MutableRefObject
+			};
+		}
+	}
+	throw Error('Unknown action: ' + action.type);
+}
+
+const getInitialState = (element) => ({
+	dimensions: { width: 0, height: 0 },
+	isPlaying: false,
+	currentTime: 0,
+	duration: 0,
+	isMuted: false,
+	videoElement: element
+});
 
 const Video = (props) =>
 {
-	const videoRef = useRef(null);
 	const placeholderRef = useRef();
-	const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 	const currBgImg = !props.popstate ? props.location.endstill : props.location.still;
 	const bgCSS = { backgroundImage: `url('${currBgImg}')`, };
-	const [isPlaying, setIsPlaying] = useState(false);
-	const [currentTime, setCurrentTime] = useState(0);
-	const [storyMode, setStoryMode] = useState(false);
-	const [duration, setDuration] = useState(0);
-	const [volume, setVolume] = useState(1);
+	const videoElement = useRef(null);
+	const [state, send] = useReducer(
+		reducer,
+		getInitialState(videoElement)
+	);
+	const dimensions = () => state.dimensions;
+	const isReady = () => state.isReady;
+	const isPlaying = () => state.isPlaying;
+	const currentTime = () => state.currentTime;
+	const duration = () => state.duration;
+	const isMuted = () => state.isMuted;
 
-	if (props.location.state !== "start")
-		console.log(props);
-
-	const handlePlayPause = () =>
-	{
-		if (isPlaying)
-		{
-			videoRef.current.pause();
-			setIsPlaying(false);
-		} else
-		{
-			videoRef.current.play();
-			setIsPlaying(true);
-		}
-	};
+	// if (props.location.state !== "start")
+	// console.log(props);
 
 	const handleTimeUpdate = () =>
 	{
-		setCurrentTime(videoRef.current.currentTime);
-
-		//? Check if page is in "story mode"
-		if (props.page.current.classList.contains("story-mode"))
-		{
-			setStoryMode(true);
-			setIsPlaying(true);
-		} else
-		{
-			setStoryMode(false);
-			setIsPlaying(false);
-		}
+		send({ type: "current_time" });
+		send({ type: "playing" });
 
 		//? If the video is ending in 1.5s start hiding the title
 		if (
 			props.location.state !== "start" &&
-			videoRef.current.duration - currentTime <= 1.5
+			videoElement?.current?.duration - currentTime() <= 1.5
 		)
 		{
 			document.querySelector(".title-block").classList.add("reveal-hide");
 		}
-		props.routeCallback({ "time": currentTime, "duration": duration });
-	};
-	const handleDurationChange = () =>
-	{
-		setDuration(videoRef.current.duration);
-	};
-	const handleVolumeChange = (event) =>
-	{
-		setVolume(event.target.value);
-		videoRef.current.volume = event.target.value;
-	};
-	const handleSeek = (value) =>
-	{
-		videoRef.current.currentTime = value;
+
+		//* Update Time for Parent Component
+		props.routeCallback({ "time": currentTime(), "duration": duration(), "video": videoElement?.current });
 	};
 
 	const revealQuote = () =>
@@ -81,32 +127,26 @@ const Video = (props) =>
 
 	const showContent = () =>
 	{
-		setDimensions({
-			width: videoRef.current.getBoundingClientRect().width,
-			height: videoRef.current.getBoundingClientRect().height,
-		});
-		if (placeholderRef)
-		{
-			placeholderRef.current.style.width = dimensions.width;
-			placeholderRef.current.style.height = dimensions.height;
-		}
 		console.log("show content");
+		send({ type: "dimensions" });
+
+		placeholderRef.current.style.width = dimensions().width;
+		placeholderRef.current.style.height = dimensions().height;
+
 		document.querySelector(
 			".video-placeholder"
 		).style.backgroundImage = `url('${props.location.endstill}')`;
 		revealQuote();
 		setTimeout(function ()
 		{
-			videoRef.current.style.opacity = 0;
+			videoElement.current.style.opacity = 0;
 		}, 500);
 	};
 
 	const onEndedFn = () =>
 	{
-		sessionStorage.setItem("routerPushTriggered", "false");
-		setIsPlaying(false);
+		send({ type: "ended" });
 		props.page.current.classList.remove("story-mode");
-		setStoryMode(false);
 		showContent();
 	};
 
@@ -116,15 +156,11 @@ const Video = (props) =>
 		if (props.location.state === "start" || !props.popstate)
 		{
 			revealQuote();
-			console.log("yup");
 		}
 
-		if (videoRef.current)
+		if (videoElement.current)
 		{
-			setDimensions({
-				width: videoRef.current.getBoundingClientRect().width,
-				height: videoRef.current.getBoundingClientRect().height,
-			});
+			send({ type: "dimensions" });
 		}
 
 		if (
@@ -135,7 +171,7 @@ const Video = (props) =>
 		{
 			const vidDuration = props.popstate
 				? document.getElementById("SceneVideo").duration
-				: videoRef.current.duration;
+				: videoElement.current.duration;
 			showContent();
 			setStoryMode(false);
 			handleSeek(vidDuration);
@@ -143,11 +179,11 @@ const Video = (props) =>
 
 		const handleResize = () =>
 		{
-			if (videoRef.current)
+			if (videoElement.current)
 			{
 				setDimensions({
-					width: videoRef.current.getBoundingClientRect().width,
-					height: videoRef.current.getBoundingClientRect().height,
+					width: videoElement.current.getBoundingClientRect().width,
+					height: videoElement.current.getBoundingClientRect().height,
 				});
 			}
 		}
@@ -168,7 +204,8 @@ const Video = (props) =>
 			animate={{ opacity: 1 }}
 			transition={{ ease: "easeInOut", duration: 0.5 }}>
 			<video
-				ref={videoRef}
+				// ref={videoRef}
+				ref={videoElement}
 				data-video={props.location.state}
 				id="SceneVideo"
 				src={props.location.vid}
@@ -178,7 +215,8 @@ const Video = (props) =>
 				playsInline
 				onEnded={onEndedFn}
 				onTimeUpdate={handleTimeUpdate}
-				onLoadedMetadata={handleDurationChange}
+				onLoadedMetadata={() => send({ type: "duration" })}
+				onCanPlay={() => send({ type: "ready" })}
 				autoPlay={true}
 				loop={props.location.state === "start" ? true : false}
 				muted={props.location.state === "start" ? true : false}
@@ -188,7 +226,7 @@ const Video = (props) =>
 				ref={placeholderRef}
 				id="VideoPlaceholder"
 				className="video-placeholder"
-				style={{ ...bgCSS, width: dimensions.width, height: dimensions.height }}
+				style={{ ...bgCSS, width: dimensions().width, height: dimensions().height }}
 			/>
 		</motion.div>
 	);

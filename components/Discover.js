@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 
 const Discover = (props) =>
 {
-	console.log(props.isOpen);
+	// console.log(props.isOpen);
 	return (
 		<motion.div layout
 			animate={{ scale: props.isOpen ? 1 : 0 }}

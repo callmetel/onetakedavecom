@@ -3,14 +3,14 @@ import { BikeStop } from "/components/BikeStop";
 
 export const BikeRoute = (props) =>
 {
-    console.log("Bike route:");
+    // console.log("Bike route:");
     const BikeStops = ["who", "what", "where", "when", "why", "how"];
     const currWidth = Math.ceil((props.time / props.duration) * 100) || 0;
     const locationIndex = parseInt(BikeStops.indexOf(props.state));
     const markerWidth = !props.popstate || props.clicked ? Math.ceil(((locationIndex + 1) / 6) * 100) : Math.ceil(((locationIndex / 6) * 100) + (16.667 * (currWidth / 100)));
-    console.log(locationIndex);
-    console.log(markerWidth);
-    console.log(props.clicked);
+    // console.log(locationIndex);
+    // console.log(markerWidth);
+    // console.log(props.clicked);
 
     return (
         <div className="BikeRoute">
@@ -20,7 +20,7 @@ export const BikeRoute = (props) =>
             {
                 BikeStops.map((stop, i) =>
                 {
-                    console.log(currWidth);
+                    // console.log(currWidth);
                     if (stop === props.state && props.popstate)
                         var locationWidth = `${currWidth >= 98 ? 100 : currWidth}%`;
 
