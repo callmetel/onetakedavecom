@@ -23,7 +23,6 @@ const reducer = (state, action) =>
 		case 'playing': {
 			if (state.isReady)
 			{
-				// state.videoElement?.current?.play();
 				return {
 					...state,
 					isPlaying: true
@@ -40,6 +39,17 @@ const reducer = (state, action) =>
 				};
 			}
 			return state;
+		}
+		case 'skip': {
+			if (state.videoElement?.current)
+			{
+				state.videoElement.current.pause();
+				state.videoElement.current.currentTime = state.videoElement.current.duration;
+			}
+			return {
+				...state,
+				isPlaying: false
+			};
 		}
 		case 'current_time': {
 			return {
@@ -91,6 +101,7 @@ const Video = (props) =>
 	const dimensions = () => state.dimensions;
 	const isReady = () => state.isReady;
 	const isPlaying = () => state.isPlaying;
+	const isSkip = () => state.isSkip;
 	const currentTime = () => state.currentTime;
 	const duration = () => state.duration;
 	const isMuted = () => state.isMuted;
@@ -105,8 +116,8 @@ const Video = (props) =>
 
 		//? If the video is ending in 1.5s start hiding the title
 		if (
-			props.location.state !== "start" &&
-			videoElement?.current?.duration - currentTime() <= 1.5
+			(props.location.state !== "start" &&
+				videoElement?.current?.duration - currentTime() <= 1.5) || !isPlaying()
 		)
 		{
 			document.querySelector(".title-block").classList.add("reveal-hide");
@@ -204,7 +215,6 @@ const Video = (props) =>
 			animate={{ opacity: 1 }}
 			transition={{ ease: "easeInOut", duration: 0.5 }}>
 			<video
-				// ref={videoRef}
 				ref={videoElement}
 				data-video={props.location.state}
 				id="SceneVideo"
