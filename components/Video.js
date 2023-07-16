@@ -117,7 +117,7 @@ const Video = (props) =>
 		//? If the video is ending in 1.5s start hiding the title
 		if (
 			(props.location.state !== "start" &&
-				videoElement?.current?.duration - currentTime() <= 1.5) || !isPlaying()
+				(videoElement?.current?.duration - currentTime() <= 1.5) || !isPlaying())
 		)
 		{
 			document.querySelector(".title-block").classList.add("reveal-hide");
@@ -171,7 +171,12 @@ const Video = (props) =>
 
 		if (videoElement.current)
 		{
+			// console.log(videoElement.current)
 			send({ type: "dimensions" });
+			if (!props.clicked && !isNaN(videoElement.current.duration))
+			{
+				videoElement.current.currentTime = videoElement.current.duration;
+			}
 		}
 
 		if (
@@ -227,7 +232,7 @@ const Video = (props) =>
 				onTimeUpdate={handleTimeUpdate}
 				onLoadedMetadata={() => send({ type: "duration" })}
 				onCanPlay={() => send({ type: "ready" })}
-				autoPlay={true}
+				autoPlay={props.popstate ? true : false}
 				loop={props.location.state === "start" ? true : false}
 				muted={props.location.state === "start" ? true : false}
 				style={!props.popstate && props.location.state !== "start" ? { "opacity": 0 } : {}}

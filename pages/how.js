@@ -15,18 +15,20 @@ const How = (props) =>
 	const handleRoute = (routeData) =>
 	{
 		setRoute(routeData);
+		// console.log(routeData);
 	}
 	const addtlProps = { "page": pageRef, "routeCallback": handleRoute };
 	let [isOpen, setState] = useState(false);
 	function handleDiscover(data)
 	{
-		setState(data == undefined ? true : false);
+		// console.log(data);
+		setState(data);
 	}
 
 	return (
 		<div className="page" ref={pageRef} data-page={props.location.state}>
 			<main className="main">
-				<Title title={props.location.title} />
+				<Title title={props.location.title} routeChanged={props.routeChanged} />
 				<Video {...props} {...addtlProps} />
 				<div className="content">
 					<Quote {...props.location.quote} />
@@ -35,9 +37,11 @@ const How = (props) =>
 						link={"/" + props.location.next}
 						onClick={() => ref.current.log()}
 					/>
-					<DiscoverButton click={handleDiscover} />
+					<DiscoverButton click={() => { handleDiscover(true) }} />
 				</div>
-				<Discover state={props.location.state} isOpen={isOpen} discoverCallback={handleDiscover} />
+				<Discover state={props.location.state} routeChanged={props.routeChanged} isOpen={isOpen} discoverCallback={handleDiscover}>
+					<button className="CloseDiscover" onClick={() => { handleDiscover(false) }}>Close</button>
+				</Discover>
 				<BikeRoute state={props.location.state} time={route.time} duration={route.duration} popstate={props.popstate} clicked={props.routeChanged} />
 			</main>
 		</div>

@@ -2,6 +2,9 @@
     @include fixed(top 0 left 0);
     @include size(100vw, 100vh);
     z-index: 4000;
-    background-color: $black;
-    color: $white;
+    background-color: $white;
+
+    .DiscoverContent {
+        background-color: $black;
+    }
 }

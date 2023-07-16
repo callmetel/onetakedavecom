@@ -5,35 +5,36 @@ const Discover = (props) =>
 	// console.log(props.isOpen);
 	const OpenCloseAnimations = props.isOpen ?
 		{
-			x: 0,
-			scaleY: 1,
+			y: 0,
+			scaleX: 1,
+			transformOrigin: "top"
 		}
 		: {
-			x: "-100%",
-			scaleY: 0.01,
+			y: "100%",
+			scaleX: 0.001,
+			transformOrigin: "top"
 		};
 	const OpenCloseTransitions = props.isOpen ?
 		{
-			x: { duration: .3 },
-			scaleY: { duration: .4, delay: .4 },
+			y: { duration: .3 },
+			scaleX: { duration: .4, delay: .4 },
 		}
-		: {
-			x: { duration: .3, delay: .5 },
-			scaleY: { duration: .4 },
-		};
-	const closeDiscover = () =>
-	{
-		props.discoverCallback(false);
-	};
+		: props.routeChanged ?
+			{
+				y: { duration: 0 },
+				scaleX: { duration: 0 },
+			}
+			: {
+				y: { duration: .3, delay: .5 },
+				scaleX: { duration: .4 },
+			};
 	return (
 		<motion.div layout
 			animate={OpenCloseAnimations}
 			transition={OpenCloseTransitions}
 			className="Discover"
 			data-state={props.state}>
-			<div className="DiscoverContent">Discover Content</div>
-			<div className="discover-transition"></div>
-			<button className="CloseDiscover" onClick={closeDiscover}>Close</button>
+			{props.children}
 		</motion.div>
 	);
 };

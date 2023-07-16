@@ -38,7 +38,7 @@ function Page({ Component, pageProps })
 			locationData = {
 				state: "who",
 				title: "Who is OneTakeDave?",
-				quote: ["I want 'em to", "love me", "for scriptures", "I've written"],
+				quote: ["I want 'em", "to love me", "for scriptures", "I've written"],
 				next: "what",
 				endstill: process.env.sceneStillURL + 2 + ".jpg",
 				vid: process.env.videoURL + 1 + ".mp4",
