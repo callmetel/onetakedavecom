@@ -1,33 +1,51 @@
 @font-face {
-    font-family: "Gotham";
-    src: url("#{$path-font}/hinted-GothamLight.woff2") format("woff2"),
-    url("#{$path-font}/hinted-GothamLight.woff") format("woff");
+    font-family: 'Gotham';
+    src: local('Gotham-Light'),
+    url('#{$path-font}/Gotham-Light.woff2') format('woff2'),
+    url('#{$path-font}/Gotham-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: "Gotham";
-    src: url("#{$path-font}/hinted-GothamMedium.woff2") format("woff2"),
-    url("#{$path-font}/hinted-GothamMedium.woff") format("woff");
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Gotham";
-    src: url("#{$path-font}/hinted-GothamBold.woff2") format("woff2"),
-    url("#{$path-font}/hinted-GothamBold.woff") format("woff");
+    font-family: 'Gotham';
+    src: local('Gotham-Bold'),
+    url('#{$path-font}/Gotham-Bold.woff2') format('woff2'),
+    url('#{$path-font}/Gotham-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-    font-family: "Gotham";
-    src: url("#{$path-font}/hinted-GothamBlack.woff2") format("woff2"),
-    url("#{$path-font}/hinted-GothamBlack.woff") format("woff");
-    font-weight: bolder;
+    font-family: 'Gotham';
+    src: local('Gotham-Book'),
+    url('#{$path-font}/Gotham-Book.woff2') format('woff2'),
+    url('#{$path-font}/Gotham-Book.woff') format('woff');
+    font-weight: normal;
     font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gotham';
+    src: local('Gotham-Black'),
+    url('#{$path-font}/Gotham-Black.woff2') format('woff2'),
+    url('#{$path-font}/Gotham-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gotham';
+    src: local('Gotham-Medium'),
+    url('#{$path-font}/Gotham-Medium.woff2') format('woff2'),
+    url('#{$path-font}/Gotham-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
 }
 
 .title a {

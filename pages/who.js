@@ -9,6 +9,7 @@ import React, { useRef, useState } from "react";
 
 const Who = (props) =>
 {
+	const img = process.env.imgURL;
 	const ref = useRef();
 	const pageRef = React.createRef();
 	let [route, setRoute] = useState({ "time": 0, "duration": 0 });
@@ -40,16 +41,18 @@ const Who = (props) =>
 					<DiscoverButton click={() => { handleDiscover(true) }} />
 				</div>
 				<Discover state={props.location.state} routeChanged={props.routeChanged} isOpen={isOpen} discoverCallback={handleDiscover}>
-					<div className="DiscoverContent">
-						<div className="HeaderImg">
-
-						</div>
-						<div className="Headline">Born with DJ Disco Dave as a father,</div>
-						<div className="Paragraph"><p>OneTakeDave had exclusive access to classic soul and funk music, as well as a light knowledge of sound blending and electronic mixing equipment. Keeping it all in the family, the senior Dave was exposed to the very beginnings of DJ culture when his mother would travel between Allentown, PA and Philadelphia, breaking all the latest records of the city’s hottest musicians at her house parties. As a precocious and highly observant child, OneTakeDave began to note the mood-changing power of the DJ, and he began to carry on the family tradition and embrace the elements of the lifestyle, eventually wanting to practice DJ’ing stint before focusing his talents on rap.</p></div>
-						<div className="FooterImg">
-						</div>
+					<div className="HeaderImg">
+						<img src={`${img}who-1.jpg`} className="mainImg" />
+						<img src={`${img}who-2.png`} className="titleText" />
+						<img src={`${img}who-3.png`} className="signature" />
+						<img src={`${img}who-shadow-1.png`} className="shadow" />
 					</div>
-					<button className="CloseDiscover" onClick={() => { handleDiscover(false) }}>Close</button>
+					<div className="Headline">Born with DJ&nbsp;Disco Dave as a father,</div>
+					<div className="Paragraph"><p>OneTakeDave had exclusive access to classic soul and funk music, as well as a light knowledge of sound blending and electronic mixing equipment. Keeping it all in the family, the senior Dave was exposed to the very beginnings of DJ culture when his mother would travel between Allentown, PA and Philadelphia, breaking all the latest records of the city’s hottest musicians at her house parties. As a precocious and highly observant child, OneTakeDave began to note the mood-changing power of the DJ, and he began to carry on the family tradition and embrace the elements of the lifestyle, eventually wanting to practice DJ’ing stint before focusing his talents on rap.</p></div>
+					<div className="FooterImg">
+						<img src={`${img}who-4.jpg`} />
+						<img src={`${img}who-shadow-2.png`} className="shadow" />
+					</div>
 				</Discover>
 				<BikeRoute state={props.location.state} time={route.time} duration={route.duration} popstate={props.popstate} clicked={props.routeChanged} />
 			</main>

@@ -91,7 +91,7 @@ const getInitialState = (element) => ({
 const Video = (props) =>
 {
 	const placeholderRef = useRef();
-	const currBgImg = !props.popstate ? props.location.endstill : props.location.still;
+	const currBgImg = !props.routeChanged ? props.location.endstill : props.location.still;
 	const bgCSS = { backgroundImage: `url('${currBgImg}')`, };
 	const videoElement = useRef(null);
 	const [state, send] = useReducer(
@@ -164,28 +164,27 @@ const Video = (props) =>
 	useEffect(() =>
 	{
 		//? If on home page or page is refreshed, reveal quote
-		if (props.location.state === "start" || !props.popstate)
+		if (props.location.state === "start" || !props.routeChanged)
 		{
 			revealQuote();
 		}
 
 		if (videoElement.current)
 		{
-			// console.log(videoElement.current)
 			send({ type: "dimensions" });
-			if (!props.clicked && !isNaN(videoElement.current.duration))
+			if (!props.routeChanged && !isNaN(videoElement.current.duration))
 			{
 				videoElement.current.currentTime = videoElement.current.duration;
 			}
 		}
 
 		if (
-			sessionStorage.getItem("routerPushTriggered") === "false" &&
+			!props.routeChanged &&
 			!isPlaying &&
 			props.location.state !== "start"
 		)
 		{
-			const vidDuration = props.popstate
+			const vidDuration = props.routeChanged
 				? document.getElementById("SceneVideo").duration
 				: videoElement.current.duration;
 			showContent();
@@ -196,12 +195,7 @@ const Video = (props) =>
 		const handleResize = () =>
 		{
 			if (videoElement.current)
-			{
-				setDimensions({
-					width: videoElement.current.getBoundingClientRect().width,
-					height: videoElement.current.getBoundingClientRect().height,
-				});
-			}
+				send({ type: "dimensions" });
 		}
 
 		window.addEventListener('resize', handleResize);
@@ -232,10 +226,10 @@ const Video = (props) =>
 				onTimeUpdate={handleTimeUpdate}
 				onLoadedMetadata={() => send({ type: "duration" })}
 				onCanPlay={() => send({ type: "ready" })}
-				autoPlay={props.popstate ? true : false}
+				autoPlay={props.routeChanged ? true : false}
 				loop={props.location.state === "start" ? true : false}
 				muted={props.location.state === "start" ? true : false}
-				style={!props.popstate && props.location.state !== "start" ? { "opacity": 0 } : {}}
+				style={!props.routeChanged && props.location.state !== "start" ? { "opacity": 0 } : {}}
 			/>
 			<div
 				ref={placeholderRef}

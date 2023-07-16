@@ -28,13 +28,23 @@ const Discover = (props) =>
 				y: { duration: .3, delay: .5 },
 				scaleX: { duration: .4 },
 			};
+
+	const closeDiscover = () =>
+	{
+		props.discoverCallback(false);
+	};
 	return (
 		<motion.div layout
 			animate={OpenCloseAnimations}
 			transition={OpenCloseTransitions}
 			className="Discover"
 			data-state={props.state}>
-			{props.children}
+			<div className="DiscoverContent">
+				<button className="CloseDiscover" onClick={closeDiscover}>Back</button>
+				<div class="Inner">
+					{props.children}
+				</div>
+			</div>
 		</motion.div>
 	);
 };
