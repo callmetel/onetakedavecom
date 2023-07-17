@@ -5,6 +5,8 @@
     background-color: $white;
     display: flex;
     flex-direction: column;
+    transform: translateY(100%) scaleX(0.001);
+    transform-origin: top;
 
     .DiscoverContent {
         background-color: $black;
@@ -97,8 +99,7 @@
             align-items: center;
             background: transparent;
 
-            &:before {
-                content: "";
+            .line {
                 @include size(5vw, 2px);
                 min-width: 50px;
                 background-color: $white;
