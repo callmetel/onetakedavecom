@@ -42,11 +42,6 @@
                     display: block;
                     max-width: 325px;
                 }
-
-                .shadow {
-                    @include absolute(bottom -10% left 50%);
-                    transform: translateX(-50%);
-                }
             }
 
             .Headline {
@@ -80,10 +75,6 @@
                 img {
                     display: block;
                     max-width: 300px;
-
-                    &.shadow {
-                        @include absolute(top -10%);
-                    }
                 }
             }
         }

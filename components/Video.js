@@ -91,7 +91,7 @@ const getInitialState = (element) => ({
 const Video = (props) =>
 {
 	const placeholderRef = useRef();
-	const currBgImg = !props.routeChanged ? props.location.endstill : props.location.still;
+	const currBgImg = !props.popstate ? props.location.endstill : props.location.still;
 	const bgCSS = { backgroundImage: `url('${currBgImg}')`, };
 	const videoElement = useRef(null);
 	const [state, send] = useReducer(
@@ -164,7 +164,7 @@ const Video = (props) =>
 	useEffect(() =>
 	{
 		//? If on home page or page is refreshed, reveal quote
-		if (props.location.state === "start" || !props.routeChanged)
+		if (props.location.state === "start" || !props.popstate)
 		{
 			revealQuote();
 		}
@@ -174,6 +174,7 @@ const Video = (props) =>
 			send({ type: "dimensions" });
 			if (!props.routeChanged && !isNaN(videoElement.current.duration))
 			{
+				console.log(videoElement.current.duration);
 				videoElement.current.currentTime = videoElement.current.duration;
 			}
 		}
@@ -184,7 +185,7 @@ const Video = (props) =>
 			props.location.state !== "start"
 		)
 		{
-			const vidDuration = props.routeChanged
+			const vidDuration = props.popstate
 				? document.getElementById("SceneVideo").duration
 				: videoElement.current.duration;
 			showContent();
@@ -195,7 +196,9 @@ const Video = (props) =>
 		const handleResize = () =>
 		{
 			if (videoElement.current)
+			{
 				send({ type: "dimensions" });
+			}
 		}
 
 		window.addEventListener('resize', handleResize);
@@ -226,10 +229,10 @@ const Video = (props) =>
 				onTimeUpdate={handleTimeUpdate}
 				onLoadedMetadata={() => send({ type: "duration" })}
 				onCanPlay={() => send({ type: "ready" })}
-				autoPlay={props.routeChanged ? true : false}
+				autoPlay={props.popstate ? true : false}
 				loop={props.location.state === "start" ? true : false}
 				muted={props.location.state === "start" ? true : false}
-				style={!props.routeChanged && props.location.state !== "start" ? { "opacity": 0 } : {}}
+				style={!props.popstate && props.location.state !== "start" ? { "opacity": 0 } : {}}
 			/>
 			<div
 				ref={placeholderRef}

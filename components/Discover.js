@@ -16,7 +16,8 @@ const useDiscoverAnimation = (isOpen) =>
 	const ClosingSequence = [
 		[".CloseDiscover .text", { opacity: [1, 0] }, { duration: 0.4, ease: "easeInOut" }],
 		[".CloseDiscover .line", { scaleX: [1, 0], transformOrigin: "left" }, { duration: 0.3, ease: "easeInOut", at: "<" }],
-		[".HeaderImg img", { opacity: [1, 0], y: ["0%", "-20%"] }, { duration: 0.75, delay: stagger(0.2, { from: "last" }), ease: "easeInOut" }],
+		[".Inner div:not(.HeaderImg)", { opacity: [1, 0], y: ["0%", "-20%"] }, { duration: 0.75, delay: stagger(0.2, { from: "last" }), ease: "easeInOut" }],
+		[".HeaderImg img", { opacity: [1, 0], y: ["0%", "-20%"] }, { duration: 0.75, delay: stagger(0.2, { from: "last" }), ease: "easeInOut", at: "<" }],
 		[scope.current, { scaleX: [1, 0.001] }, { duration: .4, ease: "easeInOut" }],
 		[".DiscoverContent", { background: ["#000", "#fff"] }, { duration: 0.001, ease: "easeInOut" }],
 		[scope.current, { y: ["0%", "100%"] }, { duration: .3, at: "<", ease: "easeInOut" }],

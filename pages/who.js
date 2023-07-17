@@ -45,10 +45,9 @@ const Who = (props) =>
 				</div>
 				<Discover forwardedRef={DiscoverContentRef} state={props.location.state} routeChanged={props.routeChanged} isOpen={isOpen} discoverCallback={handleDiscover}>
 					<div className="HeaderImg">
-						<img src={`${img}who-1.jpg`} className="mainImg" />
+						<img src={`${img}who-1_1.jpg`} className="mainImg" />
 						<img src={`${img}who-2.png`} className="titleText" />
 						<img src={`${img}who-3.png`} className="signature" />
-						<img src={`${img}who-shadow-1.png`} className="shadow" />
 					</div>
 					<motion.div
 						className="Headline"
@@ -67,8 +66,7 @@ const Who = (props) =>
 						initial={{ opacity: 0, y: "20%", x: "0vw" }}
 						whileInView={{ opacity: 1, y: "0%", x: "0vw", transition: { delay: 0.25, duration: 1, ease: "easeInOut" } }}
 						viewport={{ root: DiscoverContentRef, once: false }}>
-						<img src={`${img}who-4.jpg`} />
-						<img src={`${img}who-shadow-2.png`} className="shadow" />
+						<img src={`${img}who-4_1.jpg`} />
 					</motion.div>
 				</Discover>
 				<BikeRoute state={props.location.state} time={route.time} duration={route.duration} popstate={props.popstate} clicked={props.routeChanged} />
