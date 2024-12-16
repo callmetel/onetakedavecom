@@ -105,6 +105,7 @@ const Video = (props) =>
 	const currentTime = () => state.currentTime;
 	const duration = () => state.duration;
 	const isMuted = () => state.isMuted;
+	const isStart = () => props.location.state === "start" ? true : false;
 
 	// if (props.location.state !== "start")
 	// console.log(props);
@@ -116,8 +117,8 @@ const Video = (props) =>
 
 		//? If the video is ending in 1.5s start hiding the title
 		if (
-			(props.location.state !== "start" &&
-				(videoElement?.current?.duration - currentTime() <= 1.5) || !isPlaying())
+			!isStart() &&
+			((videoElement?.current?.duration - currentTime() <= 1.5) || !isPlaying())
 		)
 		{
 			document.querySelector(".title-block").classList.add("reveal-hide");
@@ -164,9 +165,11 @@ const Video = (props) =>
 	useEffect(() =>
 	{
 		//? If on home page or page is refreshed, reveal quote
-		if (props.location.state === "start" || !props.popstate)
+		if (isStart() || !props.popstate)
 		{
 			revealQuote();
+			console.info(bgCSS);
+			console.info(videoElement);
 		}
 
 		if (videoElement.current)
@@ -182,7 +185,7 @@ const Video = (props) =>
 		if (
 			!props.routeChanged &&
 			!isPlaying &&
-			props.location.state !== "start"
+			!isStart()
 		)
 		{
 			const vidDuration = props.popstate
@@ -229,10 +232,10 @@ const Video = (props) =>
 				onTimeUpdate={handleTimeUpdate}
 				onLoadedMetadata={() => send({ type: "duration" })}
 				onCanPlay={() => send({ type: "ready" })}
-				autoPlay={props.popstate ? true : false}
-				loop={props.location.state === "start" ? true : false}
-				muted={props.location.state === "start" ? true : false}
-				style={!props.popstate && props.location.state !== "start" ? { "opacity": 0 } : {}}
+				autoPlay={props.popstate || isStart() ? true : false}
+				loop={isStart() ? true : false}
+				muted={isStart() ? true : false}
+				style={!props.popstate && !isStart() ? { "opacity": 0 } : {}}
 			/>
 			<div
 				ref={placeholderRef}
